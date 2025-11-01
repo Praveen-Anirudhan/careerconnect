@@ -1,5 +1,5 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {faArrowLeft, faSuitcase } from "@fortawesome/free-solid-svg-icons";
+import { Briefcase,MoveLeft } from 'lucide-react';
+
 
 export default function Login(){
     return(
@@ -7,7 +7,7 @@ export default function Login(){
 
             <div className="absolute top-16 flex flex-col items-center gap-2">
                 <div className="flex items-center gap-2">
-                    <FontAwesomeIcon icon={faSuitcase} className="text-cyan-600" size="xl" />
+                    <Briefcase className="text-cyan-600" size={32}/>
                     <h1 className="text-3xl font-bold">CareerConnect</h1>
                 </div>
                 <p className="text-black/40 text-lg">Recruiter Portal</p>
@@ -56,7 +56,7 @@ export default function Login(){
                     <p className="text-cyan-600 hover:underline cursor-pointer">Forgot password?</p>
 
                     <div className="flex flex-row gap-2 justify-center items-center">
-                        <FontAwesomeIcon icon={faArrowLeft} className="text-cyan-600" size="1x" />
+                        <MoveLeft className="text-cyan-600"/>
                         <p className="text-cyan-600 hover:underline cursor-pointer">Back to candidate portal</p>
                     </div>
                 </div>
