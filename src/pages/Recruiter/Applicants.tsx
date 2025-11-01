@@ -1,5 +1,5 @@
 export  default  function Applicants(){
     return (
-        <h1>recruiter : applicants page</h1>
+        <h1>recruiter : applicants page1</h1>
     )
 }
