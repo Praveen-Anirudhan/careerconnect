@@ -1,5 +1,11 @@
-export  default  function Dashboard(){
+import Sidebar from "./Sidebar";
+
+export default function Dashboard(){
     return(
-        <h1>Recruiter: dashboard page</h1>
+        <div>
+            <Sidebar />
+            <h1>Dashboard</h1>
+            <p>Welcome back! Here's an overview of your recruitment activity</p>
+        </div>
     )
 }
