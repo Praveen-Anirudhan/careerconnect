@@ -7,7 +7,7 @@ export default function Login(){
                 <p className="text-black/40 text-lg">Recruiter Portal</p>
             </div>
 
-            <div className="border-1 border-gray-400 rounded-lg p-6 w-full max-w-lg shadow-lg">
+            <div className="border border-gray-400 rounded-lg p-6 w-full max-w-sm shadow-lg mx-auto sm:max-w-md md:max-w-lg lg:max-w-xl">
                 <form className="">
                         <div className="flex flex-col gap-2">
                             <p className="text-3xl font-bold">Welcome Back</p>
