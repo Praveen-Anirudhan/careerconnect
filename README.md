@@ -74,7 +74,7 @@
     ├── package-lock.json
     ├── package.json
     ├── public
-    │   └── vite.svg
+    │   └── favicon.png
     ├── src
     │   ├── App.tsx
     │   ├── context
