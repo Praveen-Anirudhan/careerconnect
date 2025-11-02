@@ -1,5 +1,6 @@
 import { Briefcase, User } from "lucide-react";
-function NavBar() {
+
+const NavBar = () => {
     return (
         <nav className="sticky top-0 z-50 w-full border-b border-gray-200 bg-white/95">
             <div className="flex h-16 items-center justify-between px-4 lg:px-8">
