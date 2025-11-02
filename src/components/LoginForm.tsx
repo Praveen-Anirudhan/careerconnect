@@ -2,7 +2,7 @@ import {Briefcase, MoveLeft} from "lucide-react";
 
 const LoginForm = () => {
     return(
-        <div className="relative flex flex-col justify-center items-center min-h-screen overflow-y-auto">
+        <div className="relative flex flex-col justify-center items-center sm:min-h-screen overflow-y-auto">
 
             <div className="top-16 flex flex-col items-center gap-2 py-6">
                 <div className="flex items-center gap-2">
