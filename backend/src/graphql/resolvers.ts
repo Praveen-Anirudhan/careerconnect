@@ -6,21 +6,24 @@ Resolvers are functions that tell GraphQL HOW to fetch or write data.
     They always return whatever the schema says
  */
 
-import { hashPassword, comparePassword } from "../utils/hash.js";
-import { generateToken } from "../auth/auth.js";
-import {findUserByEmail, createUser, safeUser, DBUser} from "../utils/user.js";
-import { pool } from "../db";
+// src/graphql/resolvers.ts
+
+import { hashPassword, comparePassword } from "../utils/hash";
+import { generateToken } from "../auth/auth";
+import { findUserByEmail, createUser, safeUser, DBUser } from "../utils/user";
+import { sql } from "../db";
 
 export const resolvers = {
     users: async () => {
-        const { rows } = await pool.query("SELECT id, email, role FROM users");
-        return rows;
+        const rows = await sql`
+            SELECT id, email, role FROM users`;
+        return rows as { id: string; email: string; role: string }[];
     },
 
     register: async ({email, password, role}: { email: string; password: string; role: string; }) => {
         const hashed = await hashPassword(password);
         const user = await createUser(email, hashed, role);
-        const token = generateToken(user);
+        const token = generateToken({ id: user.id });
         return { token, user };
     },
 
@@ -29,8 +32,10 @@ export const resolvers = {
         if (!user) throw new Error("User not found");
         const valid = await comparePassword(password, user.password);
         if (!valid) throw new Error("Invalid password");
-        const token = generateToken(user);
-        return {token, user: safeUser(user as DBUser)
+        const token = generateToken({ id: user.id });
+        return {
+            token,
+            user: safeUser(user as DBUser)
         };
     }
 };

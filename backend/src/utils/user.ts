@@ -1,6 +1,5 @@
-//Helper function
-
-import { pool } from "../db";
+// src/utils/user.ts
+import { sql } from "../db";
 
 export interface DBUser {
     id: string;
@@ -9,30 +8,33 @@ export interface DBUser {
     role: string;
 }
 
-export const findUserByEmail = async (email: string): Promise<DBUser | null> => {
-    const { rows } = await pool.query(
-        "SELECT * FROM users WHERE email = $1",
-        [email]
-    );
-    return rows[0] ?? null;
-};
+export interface SafeUser {
+    id: string;
+    email: string;
+    role: string;
+}
 
-export const createUser = async (
+export async function findUserByEmail(email: string): Promise<DBUser | null> {
+    const result = await sql`
+        SELECT * FROM users WHERE email = ${email}
+    `;
+    return (result[0] as unknown) as DBUser || null;
+}
+
+export async function createUser(
     email: string,
-    hashedPassword: string,
+    password: string,
     role: string
-): Promise<Pick<DBUser, "id" | "email" | "role">> => {
-    const { rows } = await pool.query(
-        `INSERT INTO users (email, password, role)
-         VALUES ($1, $2, $3)
-             RETURNING id, email, role`,
-        [email, hashedPassword, role]
-    );
-    return rows[0];
-};
+): Promise<SafeUser> {
+    const rows = await sql`
+        INSERT INTO users (email, password, role)
+        VALUES (${email}, ${password}, ${role})
+            RETURNING id, email, role
+    `;
+    return rows[0] as SafeUser;
+}
 
-export const safeUser = (user: DBUser) => ({
-    id: user.id,
-    email: user.email,
-    role: user.role
-});
+export function safeUser(user: DBUser): SafeUser {
+    const { ...rest } = user;
+    return rest as SafeUser;
+}
