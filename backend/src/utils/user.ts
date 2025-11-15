@@ -1,7 +1,7 @@
 // src/utils/user.ts
-import { sql } from "../db";
+import { sql } from "../db/index.ts";
 
-export interface DBUser {
+export type DBUser = {
     id: string;
     email: string;
     password: string;
