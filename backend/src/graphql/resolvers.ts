@@ -8,10 +8,10 @@ Resolvers are functions that tell GraphQL HOW to fetch or write data.
 
 // src/graphql/resolvers.ts
 
-import { hashPassword, comparePassword } from "../utils/hash";
-import { generateToken } from "../auth/auth";
-import { findUserByEmail, createUser, safeUser, DBUser } from "../utils/user";
-import { sql } from "../db";
+import { hashPassword, comparePassword } from "../utils/hash.ts";
+import { generateToken } from "../auth/auth.ts";
+import { findUserByEmail, createUser, safeUser, type DBUser } from "../utils/user.ts";
+import { sql } from "../db/index.ts";
 
 export const resolvers = {
     users: async () => {
