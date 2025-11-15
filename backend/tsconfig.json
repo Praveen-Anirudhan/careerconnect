@@ -12,7 +12,8 @@
     "allowSyntheticDefaultImports": true,
     "allowImportingTsExtensions": true,
     "forceConsistentCasingInFileNames": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "noEmit": true
   },
   "ts-node": {
     "esm": true,
