@@ -2,7 +2,7 @@
 
 A backend service for a job portal platform where recruiters can sign up, log in, and create job listings. Candidates can view jobs publicly without authentication.
 
-Built using Node.js, Express, and MongoDB.
+Built using Node.js, Express, and PostgreSQL.
 
 ## 🔧 Tech Stack
 
