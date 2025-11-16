@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "ts-node --esm --experimental-specifier-resolution=node src/server.ts",
     "build": "tsc",
-    "start": "node dist/server.js"
+    "start": "npm run dev"
   },
   "keywords": [],
   "author": "",
