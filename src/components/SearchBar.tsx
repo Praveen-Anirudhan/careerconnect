@@ -20,7 +20,7 @@ const SearchBar = () => {
             className="flex-1 outline-none text-sm"
           />
         </div>
-        <button className="bg-cyan-600 text-white rounded-lg px-6 py-3 font-medium hover:bg-cyan-700 transition-colors flex items-center justify-center gap-2">
+        <button className="bg-cyan-600 text-white rounded-lg px-6 py-3 font-medium hover:bg-cyan-700 cursor-pointer transition-colors flex items-center justify-center gap-2 ">
           <Search className="h-5 w-5" />
           Search Jobs
         </button>
