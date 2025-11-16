@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node --esm --experimental-specifier-resolution=node src/server.ts",
+    "dev": "node --loader ts-node/esm src/server.ts",
     "build": "tsc",
     "start": "npm run dev"
   },
