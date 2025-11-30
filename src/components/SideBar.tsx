@@ -1,6 +1,9 @@
 import {Briefcase, CirclePlus, File, LogOut, Users} from "lucide-react";
 
-const SideBar = () => {
+interface SideBarProps {
+    onPostJobClick: () => void;
+}
+const SideBar = ({onPostJobClick}: SideBarProps) => {
 
     const menuItems = [
         { icon: <Briefcase size={24} />, label: "Dashboard" },
@@ -28,18 +31,17 @@ const SideBar = () => {
 
                 <button
                     type="button"
+                    onClick = {onPostJobClick}
                     className="bg-cyan-600 text-white py-3 rounded-lg hover:bg-cyan-700 transition mt-6 w-full flex flex-row justify-center items-center gap-4">
                     <CirclePlus size={24}/>
                     Post New Job
                 </button>
-
             </div>
 
             <div className="flex flex-row items-center gap-2 m-6 hover:bg-gray-100 mt-auto py-4 rounded-lg px-4 border-t border-gray-300">
                 <LogOut className="text-cyan-600" size={24}/>
                 <button className="cursor-pointer">Logout</button>
             </div>
-
 
         </div>
     )
