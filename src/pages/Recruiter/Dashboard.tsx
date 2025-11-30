@@ -6,9 +6,11 @@ const Dashboard = () => {
     const [showJobDetailsForm, setShowJobDetailsForm] = useState(false);
 
     return(
-        <div className="flex">
+        <div className="flex w-screen h-screen overflow-hidden">
             <SideBar onPostJobClick={() => setShowJobDetailsForm(true)} />
-            {showJobDetailsForm && <JobDetailsForm/> }
+            <div className="w-3/4 overflow-y-auto p-6">
+                {showJobDetailsForm && <JobDetailsForm/> }
+            </div>
         </div>
     )
 }
