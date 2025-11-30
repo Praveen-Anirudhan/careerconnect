@@ -1,25 +1,13 @@
-export const TextInput = ({ label, placeholder }: { label: string; placeholder: string }) => {
+import {TextInput, TextArea} from './JobDetails.tsx'
+import {newJob, newJobDetails} from '../constants/constants.ts'
+
+export const JobDetailsForm = () => {
     return (
-        <div className="flex flex-col">
-            <label className="mb-1 font-medium">{label} *</label>
-            <input
-                type="text"
-                placeholder={placeholder}
-                className="border rounded-md p-2"
-            />
+        <div>
+            <h1>{newJob}</h1>
+            <p>{newJobDetails}</p>
+            <TextInput label="Job Title" placeholder="Enter job title"/>
+            <TextArea label="Job Description" placeholder="Enter job description"/>
         </div>
     );
 };
-
-export const TextArea = ({ label, placeholder }: { label: string; placeholder: string }) => {
-    return (
-        <div className="flex flex-col">
-            <label className="mb-1 font-medium">{label} *</label>
-            <textarea
-                placeholder={placeholder}
-                className="border rounded-md p-2 min-h-[80px]"
-            />
-        </div>
-    );
-};
-
