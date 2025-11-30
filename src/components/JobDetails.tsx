@@ -25,12 +25,12 @@ export const TextArea = ({ label, placeholder }: { label: string; placeholder: s
 
 export const SelectInput = ({ label, options, value, onChange }: { label: string; options: string[]; value: string; onChange: (value: string) => void }) => {
     return (
-        <div className="flex flex-col">
+        <div className="relative flex flex-col">
             <label className="mb-1 font-medium">{label} *</label>
             <select
                 value={value}
                 onChange={(e) => onChange(e.target.value)}
-                className="border border-gray-400 focus:border-cyan-600 focus:outline-none rounded-md p-2"
+                className="border border-gray-400 focus:border-cyan-600 focus:outline-none rounded-md p-2 w-full appearance-none"
             >
                 <option value="">Select a type</option>
                 {options.map((option) => (
@@ -39,6 +39,7 @@ export const SelectInput = ({ label, options, value, onChange }: { label: string
                     </option>
                 ))}
             </select>
+            <span className="pointer-events-none absolute right-3 top-[38px] text-gray-500">▼</span>
         </div>
     );
 };

@@ -1,6 +1,8 @@
 import {useState} from 'react';
 import {SelectInput, TextInput, TextArea} from './JobDetails.tsx'
 import {
+    cancelButton,
+    submitButton,
     newJob,
     newJobDetails,
     jobDetails,
@@ -49,8 +51,8 @@ export const JobDetailsForm = () => {
                 </div>
 
                 <div className="flex flex-row gap-4">
-                    <button className="bg-gray-400 text-white py-3 rounded-lg hover:bg-gray-500 transition w-1/3">Cancel</button>
-                    <button className="bg-cyan-600 text-white py-3 rounded-lg hover:bg-cyan-700 transition w-full">Post Job</button>
+                    <button className="bg-gray-400 text-white py-3 rounded-lg hover:bg-gray-500 transition w-1/3">{cancelButton}</button>
+                    <button className="bg-cyan-600 text-white py-3 rounded-lg hover:bg-cyan-700 transition w-full">{submitButton}</button>
                 </div>
             </div>
         </div>
