@@ -7,6 +7,10 @@ interface DashboardCardProps {
     count: number;
 }
 
+interface DashboardViewProps {
+    showDashboard: boolean;
+}
+
 const DashboardCards: DashboardCardProps[] = [
     { title: "Active Jobs", icon: <Briefcase/>, count: 0 },
     { title: "Total Applicants", icon: <Users/>, count: 0 },
@@ -44,7 +48,10 @@ const RecentActivityItem = ({title, role, time}: ActivityProps) => (
     </div>
 );
 
-const DashboardView = () => (
+const DashboardView = ({showDashboard}: DashboardViewProps) => {
+    if (!showDashboard) return null;
+
+    return (
     <div className="p-10 w-full flex flex-col gap-10">
 
         <div className="flex flex-col gap-2">
@@ -67,6 +74,7 @@ const DashboardView = () => (
             ))}
         </div>
     </div>
-);
+    )
+}
 
 export default DashboardView;

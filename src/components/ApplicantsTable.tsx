@@ -1,7 +1,7 @@
-export const ApplicantsTable = () => {
+export const ApplicantsTable = ({showApplicants}: {showApplicants: boolean}) => {
     return(
         <div>
-            <p>Applicants Table</p>
+            {showApplicants && <p>Applicants Table</p>}
         </div>
     )
 }
