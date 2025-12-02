@@ -1,16 +1,18 @@
 import {Briefcase, CirclePlus, File, LogOut, Users} from "lucide-react";
 import * as React from "react";
 
-interface SideBarProps {
+interface SideBarProps{
+    onApplicantsClick : () => void;
+    onDashboardClick : () => void;
     onPostJobClick: () => void;
 }
-const SideBar = ({onPostJobClick}: SideBarProps) => {
 
-    interface MenuItem{
-        icon: React.ReactNode;
-        label: string;
-    }
+interface MenuItem{
+    icon: React.ReactNode;
+    label: string;
+}
 
+const SideBar = ({ onApplicantsClick, onDashboardClick, onPostJobClick }: SideBarProps) => {
     const menuItems = [
         { icon: <Briefcase size={24} />, label: "Dashboard" },
         { icon: <File size={24} />, label: "My Jobs" },
@@ -18,7 +20,12 @@ const SideBar = ({onPostJobClick}: SideBarProps) => {
     ];
 
     const handleApplicantsClick = (item: MenuItem) => {
-        console.log("applicants click", item);
+        if(item.label === "Applicants"){
+            onApplicantsClick();
+        }
+        else if(item.label === "Dashboard"){
+            onDashboardClick();
+        }
     }
 
     return(
