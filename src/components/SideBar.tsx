@@ -20,10 +20,10 @@ const SideBar = ({ onApplicantsClick, onDashboardClick, onPostJobClick }: SideBa
     ];
 
     const handleApplicantsClick = (item: MenuItem) => {
-        if(item.label === "Applicants"){
+        if(item?.label === "Applicants"){
             onApplicantsClick();
         }
-        else if(item.label === "Dashboard"){
+        else if(item?.label === "Dashboard"){
             onDashboardClick();
         }
     }
