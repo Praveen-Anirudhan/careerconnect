@@ -1,3 +1,6 @@
+import {graphqlRequest} from '../utils/api';
+import {REGISTER_MUTATION} from '../containers/api';
+
 const TOKEN_KEY = 'auth_token';
 
 export const setAuthToken = (token: string): void => {
@@ -26,4 +29,40 @@ export const verifyToken = async (): Promise<boolean> => {
         console.error('Token verification failed:', error);
         return false;
     }
+};
+
+type RegisterInput = {
+    email: string;
+    password: string;
+    role: 'RECRUITER';
+};
+
+type RegisterResponse = {
+    data?: {
+        register: {
+            token: string;
+            user: {
+                id: string;
+            };
+        };
+    };
+    errors?: Array<{ message: string }>;
+};
+
+export const register = async ({ email, password, role }: RegisterInput) => {
+    const result = await graphqlRequest<RegisterInput, RegisterResponse>({
+        query: REGISTER_MUTATION,
+        variables: { email, password, role }
+    });
+
+    if (result.errors) {
+        throw new Error(result.errors[0]?.message || 'Registration failed');
+    }
+
+    if (result.data?.register?.token) {
+        setAuthToken(result.data.register.token);
+        return result.data.register;
+    }
+
+    throw new Error('Registration failed: No token received');
 };
