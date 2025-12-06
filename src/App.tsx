@@ -1,8 +1,8 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import { useAuth } from "./hooks/useAuth";
-import Register from "./pages/Register";
-import Dashboard from "./pages/Dashboard";
+import Login from "./pages/Recruiter/Login";
+import Dashboard from "./pages/Recruiter/Dashboard";
 import Home from "./pages/Home/Home";
 
 import "./styles/global.css";
@@ -20,7 +20,7 @@ function AppRoutes() {
     return (
         <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/register" element={<Register />} />
+            <Route path="/recruiter/login" element={<Login />} />
 
             <Route
                 path="/recruiter/dashboard"

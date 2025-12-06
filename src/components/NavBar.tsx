@@ -37,7 +37,7 @@ const NavBar = () => {
 
                 <div className="flex items-center gap-3">
                     <button className="inline-flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium border border-gray-300 bg-white text-gray-600 rounded-md hover:bg-cyan-500 hover:text-white transition-colors"
-                    onClick={() => navigate('/register')}>
+                    onClick={() => navigate('/recruiter/login')}>
                         <User className="h-4 w-4 mr-2" />
                         Recruiter Login
                     </button>

@@ -1,7 +1,32 @@
 import {Briefcase, MoveLeft} from "lucide-react";
+import { useState, type FormEvent } from 'react';
+import { useNavigate } from 'react-router-dom';
+import {useAuth} from '../hooks/useAuth';
+import { register } from '../services/auth';
 
 const LoginForm = () => {
-    return(
+        const [email, setEmail] = useState('');
+        const [password, setPassword] = useState('');
+        const { login } = useAuth();
+        const navigate = useNavigate();
+
+        const handleSubmit = async (e: FormEvent ) => {
+            e.preventDefault();
+
+            try {
+                const { token } =  await register({
+                    email,
+                    password,
+                    role: 'RECRUITER'
+                });
+                login(token);
+                navigate('/recruiter/dashboard', { replace: true });
+            } catch (error) {
+                console.error('Registration error:', error);
+            }
+        };
+
+        return(
         <div className="flex flex-col justify-center items-center sm:min-h-screen overflow-y-auto">
 
             <div className="flex flex-col items-center gap-2 py-8">
@@ -28,6 +53,8 @@ const LoginForm = () => {
                             name="email"
                             placeholder="recruiter@company.com"
                             className="border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
                             required
                         />
                     </div>
@@ -40,6 +67,8 @@ const LoginForm = () => {
                             name="password"
                             placeholder="********"
                             className="border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
                             required
                         />
                     </div>
@@ -47,6 +76,7 @@ const LoginForm = () => {
                     <button
                         type="submit"
                         className="w-full bg-cyan-600 text-white py-3 rounded-lg hover:bg-cyan-700 transition mt-6 "
+                        onClick={handleSubmit}
                     >
                         Sign In
                     </button>
