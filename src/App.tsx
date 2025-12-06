@@ -1,48 +1,42 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import { useAuth } from "./hooks/useAuth";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
+import Home from "./pages/Home/Home";
 
 import "./styles/global.css";
 import {type JSX} from "react";
 
 function App() {
     return (
-        <BrowserRouter>
             <AuthProvider>
                 <AppRoutes />
             </AuthProvider>
-        </BrowserRouter>
     );
 }
 
 function AppRoutes() {
     return (
         <Routes>
+            <Route path="/" element={<Home />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/login" element={<Register />} />
 
             <Route
-                path="/dashboard"
+                path="/recruiter/dashboard"
                 element={
                     <ProtectedRoute>
                         <Dashboard />
                     </ProtectedRoute>
                 }
             />
-
-            <Route path="/" element={<Navigate to="/dashboard" replace />} />
         </Routes>
     );
 }
 
 function ProtectedRoute({ children }: { children: JSX.Element }) {
     const { isAuthenticated } = useAuth();
-    if (!isAuthenticated) {
-        return <Navigate to="/login" replace />;
-    }
-    return children;
+    return isAuthenticated ? children : <Navigate to="/" replace />;
 }
 
 export default App;
