@@ -1,29 +1,20 @@
 import {Briefcase, MoveLeft} from "lucide-react";
 import { useState, type FormEvent } from 'react';
-import { useNavigate } from 'react-router-dom';
-import {useAuth} from '../hooks/useAuth';
-import {loginUser } from '../services/auth';
+import {useLogin} from "../hooks/useLogin.ts";
 
 const LoginForm = () => {
-        const [email, setEmail] = useState('');
-        const [password, setPassword] = useState('');
-        const { login } = useAuth();
-        const navigate = useNavigate();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const { handleLogin } = useLogin();
 
-        const handleSubmit = async (e: FormEvent ) => {
-            e.preventDefault();
-
-            try {
-                const { token } =  await loginUser({
-                    email,
-                    password,
-                });
-                login(token);
-                navigate('/recruiter/dashboard', { replace: true });
-            } catch (error) {
-                console.error('Registration error:', error);
-            }
-        };
+    const handleSubmit = async (e: FormEvent) => {
+        e.preventDefault();
+        try {
+            await handleLogin(email, password);
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
         return(
         <div className="flex flex-col justify-center items-center sm:min-h-screen overflow-y-auto">

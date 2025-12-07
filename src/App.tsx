@@ -4,7 +4,6 @@ import { useAuth } from "./hooks/useAuth";
 import Login from "./pages/Recruiter/Login";
 import Dashboard from "./pages/Recruiter/Dashboard";
 import Home from "./pages/Home/Home";
-
 import "./styles/global.css";
 import {type JSX} from "react";
 
