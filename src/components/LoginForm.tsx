@@ -1,20 +1,37 @@
 import {Briefcase, MoveLeft} from "lucide-react";
-import { useState, type FormEvent } from 'react';
-import {useLogin} from "../hooks/useLogin.ts";
+import { useState, useEffect, type FormEvent } from 'react';
+import {loginRequest} from "../redux/features/auth/authSlice.ts";
+import {useDispatch} from "react-redux";
+import { useSelector } from 'react-redux';
+import {selectLoading, selectUser} from "../redux/features/auth/selector.ts";
+import { useNavigate } from 'react-router-dom';
+import {isAuthenticated} from "../services/tokenService";
 
 const LoginForm = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const { handleLogin } = useLogin();
+    const [loading, setLoading] = useState(false);
+    const dispatch = useDispatch();
+    const loadingS = useSelector(selectLoading);
+    const user = useSelector(selectUser);
+    const navigate = useNavigate();
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
         try {
-            await handleLogin(email, password);
+            dispatch(loginRequest({email, password}))
+            setLoading(true);
         } catch (error) {
             console.error(error);
         }
     };
+
+    useEffect(() => {
+        if (isAuthenticated() &&user?.token) {
+            console.log(user);
+            navigate('/recruiter/dashboard');
+        }
+    }, [user, navigate]);
 
         return(
         <div className="flex flex-col justify-center items-center sm:min-h-screen overflow-y-auto">
@@ -65,11 +82,13 @@ const LoginForm = () => {
 
                     <button
                         type="submit"
-                        className="w-full bg-cyan-600 text-white py-3 rounded-lg hover:bg-cyan-700 transition mt-6 "
+                        className={`w-full flex justify-center items-center gap-2 bg-cyan-600 text-white py-3 rounded-lg hover:bg-cyan-700 transition mt-6 ${
+                            loadingS ? 'opacity-70 cursor-not-allowed' : ''
+                        }`}
                         onClick={handleSubmit}
-                        disabled={!email || !password}
+                        disabled={!email || !password || loading}
                     >
-                        Sign In
+                        {loadingS ? 'Signing in...' : 'Sign in' }
                     </button>
                 </form>
 
