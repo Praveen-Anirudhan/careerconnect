@@ -16,8 +16,9 @@ export function* handleLogin(action: PayloadAction<{ email: string; password: st
         }
         setAuthToken(user?.token);
         yield put(loginSuccess(user));
-    } catch (error: any) {
-        yield put(loginFailure(error.message));
+    } catch (error: unknown) {
+        const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred';
+        yield put(loginFailure(errorMessage));
     }
 }
 
