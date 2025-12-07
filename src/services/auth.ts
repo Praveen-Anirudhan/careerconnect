@@ -1,5 +1,5 @@
 import {graphqlRequest} from '../utils/api';
-import {REGISTER_MUTATION} from '../containers/api';
+import {LOGIN_MUTATION, REGISTER_MUTATION} from '../containers/api';
 
 const TOKEN_KEY = 'auth_token';
 
@@ -49,6 +49,23 @@ type RegisterResponse = {
     errors?: Array<{ message: string }>;
 };
 
+type LoginInput = {
+    email: string;
+    password: string;
+};
+
+type LoginResponse = {
+    data?: {
+        login: {
+            token: string;
+            user: {
+                id: string;
+            };
+        };
+    };
+    errors?: Array<{ message: string }>;
+};
+
 export const register = async ({ email, password, role }: RegisterInput) => {
     const result = await graphqlRequest<RegisterInput, RegisterResponse>({
         query: REGISTER_MUTATION,
@@ -65,4 +82,22 @@ export const register = async ({ email, password, role }: RegisterInput) => {
     }
 
     throw new Error('Registration failed: No token received');
+};
+
+export const loginUser = async ({ email, password }: LoginInput) => {
+    const result = await graphqlRequest<LoginInput, LoginResponse>({
+        query: LOGIN_MUTATION,
+        variables: { email, password }
+    });
+
+    if (result.errors) {
+        throw new Error(result.errors[0]?.message || 'Login failed');
+    }
+
+    if (result.data?.login?.token) {
+        setAuthToken(result.data.login.token);
+        return result.data.login;
+    }
+
+    throw new Error('Login failed: No token received');
 };

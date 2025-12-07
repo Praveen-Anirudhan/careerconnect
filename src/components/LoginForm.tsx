@@ -2,7 +2,7 @@ import {Briefcase, MoveLeft} from "lucide-react";
 import { useState, type FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {useAuth} from '../hooks/useAuth';
-import { register } from '../services/auth';
+import {loginUser } from '../services/auth';
 
 const LoginForm = () => {
         const [email, setEmail] = useState('');
@@ -14,10 +14,9 @@ const LoginForm = () => {
             e.preventDefault();
 
             try {
-                const { token } =  await register({
+                const { token } =  await loginUser({
                     email,
                     password,
-                    role: 'RECRUITER'
                 });
                 login(token);
                 navigate('/recruiter/dashboard', { replace: true });
@@ -77,6 +76,7 @@ const LoginForm = () => {
                         type="submit"
                         className="w-full bg-cyan-600 text-white py-3 rounded-lg hover:bg-cyan-700 transition mt-6 "
                         onClick={handleSubmit}
+                        disabled={!email || !password}
                     >
                         Sign In
                     </button>

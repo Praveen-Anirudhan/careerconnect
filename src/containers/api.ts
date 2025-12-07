@@ -8,3 +8,15 @@ export const REGISTER_MUTATION = `
     }
   }
 `;
+
+export const LOGIN_MUTATION = `
+  mutation LoginUser($email: String!, $password: String!) {
+    login(email: $email, password: $password) {
+      token
+      user {
+        id
+        role
+      }
+    }
+  }
+`;
