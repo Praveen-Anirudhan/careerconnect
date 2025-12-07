@@ -1,5 +1,5 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
-import { loginRequest, loginSuccess, loginFailure } from './authSlice';
+import { loginRequest, loginSuccess, loginFailure, logout } from './authSlice';
 import { loginUser } from '../../../services/auth';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import type {User} from './types'
@@ -16,6 +16,15 @@ export function* handleLogin(action: PayloadAction<{ email: string; password: st
         }
         setAuthToken(user?.token);
         yield put(loginSuccess(user));
+    } catch (error: unknown) {
+        const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred';
+        yield put(loginFailure(errorMessage));
+    }
+}
+
+export function* handleLogout() {
+    try {
+        yield put(logout());
     } catch (error: unknown) {
         const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred';
         yield put(loginFailure(errorMessage));
