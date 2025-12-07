@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import {selectLoading, selectUser} from "../redux/features/auth/selector.ts";
 import { useNavigate } from 'react-router-dom';
 import {isAuthenticated} from "../services/tokenService";
+import {useAuth} from "../hooks/useAuth.ts";
 
 const LoginForm = () => {
     const [email, setEmail] = useState('');
@@ -15,6 +16,7 @@ const LoginForm = () => {
     const loadingS = useSelector(selectLoading);
     const user = useSelector(selectUser);
     const navigate = useNavigate();
+    const {login} = useAuth();
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
@@ -27,8 +29,8 @@ const LoginForm = () => {
     };
 
     useEffect(() => {
-        if (isAuthenticated() &&user?.token) {
-            console.log(user);
+        if (isAuthenticated() && user?.token) {
+            login(user?.token)
             navigate('/recruiter/dashboard');
         }
     }, [user, navigate]);
