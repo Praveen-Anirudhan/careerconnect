@@ -5,7 +5,7 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 import type {User} from './types'
 import {setAuthToken} from '../../../services/tokenService'
 
-export function* handleLogin(action: PayloadAction<{ email: string; password: string }>) {
+export function* handleLogin(action: PayloadAction<{ email: string; password: string }>): Generator {
     try {
         const { email, password } = action.payload;
         const response = yield call(loginUser, email, password);
