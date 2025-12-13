@@ -30,19 +30,16 @@ const JobsPage = () => {
     );
   });
 
-  const handleJobTypeChange = (type: string) => {
-    setSelectedJobType((prev) =>
-      prev.includes(type) ? prev.filter((t) => t !== type) : [...prev, type]
+  const toggle = (value: string, setFn: any) => {
+    setFn((prev: string[]) =>
+        prev.includes(value)
+            ? prev.filter(item => item !== value)
+            : [...prev, value]
     );
   };
 
-  const handleLocationChange = (location: string) => {
-    setSelectedLocation((prev) =>
-      prev.includes(location)
-        ? prev.filter((l) => l !== location)
-        : [...prev, location]
-    );
-  };
+  const handleJobTypeChange = (type: string) => toggle(type, setSelectedJobType);
+  const handleLocationChange = (loc: string) => toggle(loc, setSelectedLocation);
 
   return (
     <div className="bg-gray-50 min-h-screen">
