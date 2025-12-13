@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Search, MapPin } from "lucide-react";
 import JobCard from "./JobCard";
 import jobs from "../data/jobs";
@@ -30,7 +30,7 @@ const JobsPage = () => {
     );
   });
 
-  const toggle = (value: string, setFn: any) => {
+  const toggle = (value: string, setFn: React.Dispatch<React.SetStateAction<string[]>>) => {
     setFn((prev: string[]) =>
         prev.includes(value)
             ? prev.filter(item => item !== value)
