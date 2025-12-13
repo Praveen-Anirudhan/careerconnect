@@ -19,7 +19,7 @@ const Footer = () => {
           </>
 
           {/* For Candidates */}
-          <div>
+          <>
             <h3 className="font-semibold text-gray-900 mb-4">For Candidates</h3>
             <ul className="space-y-2">
               <li>
@@ -39,10 +39,10 @@ const Footer = () => {
                 </a>
               </li>
             </ul>
-          </div>
+          </>
 
           {/* For Recruiters */}
-          <div>
+          <>
             <h3 className="font-semibold text-gray-900 mb-4">For Recruiters</h3>
             <ul className="space-y-2">
               <li>
@@ -62,10 +62,10 @@ const Footer = () => {
                 </a>
               </li>
             </ul>
-          </div>
+          </>
 
           {/* Company */}
-          <div>
+          <>
             <h3 className="font-semibold text-gray-900 mb-4">Company</h3>
             <ul className="space-y-2">
               <li>
@@ -85,7 +85,7 @@ const Footer = () => {
                 </a>
               </li>
             </ul>
-          </div>
+          </>
         </div>
 
         {/* Copyright */}
