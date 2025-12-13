@@ -1,15 +1,24 @@
+import {useNavigate} from "react-router-dom";
 import {Briefcase, CirclePlus, File, LogOut, Users} from "lucide-react";
+import {removeAuthToken} from "../services/tokenService.ts";
 
 interface SideBarProps {
     onPostJobClick: () => void;
 }
+
 const SideBar = ({onPostJobClick}: SideBarProps) => {
+    const navigate = useNavigate();
 
     const menuItems = [
         { icon: <Briefcase size={24} />, label: "Dashboard" },
         { icon: <File size={24} />, label: "My Jobs" },
         { icon: <Users size={24} />, label: "Applicants" },
     ];
+
+    const handleLogout = () => {
+        removeAuthToken();
+        navigate('/');
+    }
 
     return(
         <div className="bg-gray-50 h-screen w-72 border-r border-gray-200 flex flex-col">
@@ -40,7 +49,7 @@ const SideBar = ({onPostJobClick}: SideBarProps) => {
 
             <div className="flex flex-row items-center gap-2 m-6 hover:bg-gray-100 mt-auto py-4 rounded-lg px-4 border-t border-gray-300">
                 <LogOut className="text-cyan-600" size={24}/>
-                <button className="cursor-pointer">Logout</button>
+                <button className="cursor-pointer" onClick={handleLogout}>Logout</button>
             </div>
 
         </div>
