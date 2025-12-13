@@ -4,12 +4,9 @@ import {removeAuthToken} from "../services/tokenService.ts";
 
 interface SideBarProps{
     onApplicantsClick : () => void;
-    onDashboardClick : () => void;
+    onDashboardClick? : () => void;
     onPostJobClick: () => void;
 }
-
-const SideBar = ({onPostJobClick}: SideBarProps) => {
-    const navigate = useNavigate();
 
 interface MenuItem{
     icon: React.ReactNode;
@@ -17,6 +14,7 @@ interface MenuItem{
 }
 
 const SideBar = ({ onApplicantsClick, onDashboardClick, onPostJobClick }: SideBarProps) => {
+    const navigate = useNavigate();
     const menuItems = [
         { icon: <Briefcase size={24} />, label: "Dashboard" },
         { icon: <File size={24} />, label: "My Jobs" },
@@ -26,6 +24,14 @@ const SideBar = ({ onApplicantsClick, onDashboardClick, onPostJobClick }: SideBa
     const handleLogout = () => {
         removeAuthToken();
         navigate('/');
+    }
+
+    const onClick = ({label}: MenuItem) => {
+        if(label === "Dashboard"){
+            onDashboardClick?.();
+        }else if(label === "Applicants"){
+            onApplicantsClick();
+        }
     }
 
     return(
@@ -40,7 +46,7 @@ const SideBar = ({ onApplicantsClick, onDashboardClick, onPostJobClick }: SideBa
                 {menuItems.map((item, index) => (
                     <div
                         key={index}
-                        onClick={() => handleApplicantsClick(item)}
+                        onClick={() => onClick(item)}
                         className="flex flex-row items-center gap-6 px-4 hover:bg-gray-100 rounded-lg py-2">
                         {item.icon}
                         <p>{item.label}</p>
