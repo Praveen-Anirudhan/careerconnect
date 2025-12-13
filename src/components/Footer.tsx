@@ -4,7 +4,7 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-6 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand Section */}
-          <div>
+          <>
             <div className="flex items-center gap-2 mb-4">
               <div className="w-8 h-8 bg-cyan-600 rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-xl">C</span>
@@ -16,7 +16,7 @@ const Footer = () => {
             <p className="text-gray-600 text-sm">
               Connecting talented individuals with amazing career opportunities.
             </p>
-          </div>
+          </>
 
           {/* For Candidates */}
           <div>

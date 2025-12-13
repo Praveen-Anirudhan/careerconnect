@@ -9,6 +9,8 @@ const JobsPage = () => {
   const [selectedJobType, setSelectedJobType] = useState<string[]>([]);
   const [selectedLocation, setSelectedLocation] = useState<string[]>([]);
 
+  const locationData = ["Remote", "San Francisco, CA", "New York, NY", "Austin, TX", "Seattle, WA"]
+
   const filteredJobs = jobs.filter((job) => {
     const matchesSearch =
       job.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -110,13 +112,7 @@ const JobsPage = () => {
               <div>
                 <h3 className="font-semibold text-gray-900 mb-4">Location</h3>
                 <div className="space-y-2">
-                  {[
-                    "Remote",
-                    "San Francisco, CA",
-                    "New York, NY",
-                    "Austin, TX",
-                    "Seattle, WA",
-                  ].map((location) => (
+                  {locationData.map((location) => (
                     <label
                       key={location}
                       className="flex items-center gap-2 cursor-pointer"
