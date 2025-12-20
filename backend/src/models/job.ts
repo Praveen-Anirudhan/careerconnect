@@ -9,5 +9,6 @@ export interface Job{
     requirements: string,
     responsibilities: string,
     postedBy: string;
-    createdAt?: Date;
+    createdAt: Date;
+    skills: string;
 }
