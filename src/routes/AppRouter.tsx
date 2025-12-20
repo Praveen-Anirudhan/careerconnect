@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import {Routes, Route, Navigate} from "react-router-dom";
 import Home from "../pages/Home/Home";
 import JobList from "../pages/Candidate/JobList";
 import JobDetails from "../pages/Candidate/JobDetails";
@@ -9,6 +9,9 @@ import PostJob from "../pages/Recruiter/PostJob";
 import Applicants from "../pages/Recruiter/Applicants";
 import Login from "../pages/Recruiter/Login";
 import NotFound from "../pages/NotFound";
+import Dashboard from "../pages/Recruiter/Dashboard";
+import type {JSX} from "react";
+import {useAuth} from "../hooks/useAuth.ts";
 
 export default function AppRouter() {
     return (
@@ -19,6 +22,12 @@ export default function AppRouter() {
             <Route path="/apply/:id" element={<ApplyJob />} />
             <Route path="/applications" element={<MyApplications />} />
 
+            <Route path="/recruiter/dashboard" element={
+                <ProtectedRoute>
+                        <Dashboard />
+                    </ProtectedRoute>
+                }
+            />
             <Route path="/recruiter/login" element={<Login />} />
             <Route path="/recruiter/dashboard" element={<RecruiterDashboard />} />
             <Route path="/recruiter/post" element={<PostJob />} />
@@ -28,3 +37,9 @@ export default function AppRouter() {
         </Routes>
     );
 }
+
+function ProtectedRoute({ children }: { children: JSX.Element }) {
+    const { isAuthenticated } = useAuth();
+    return isAuthenticated ? children : <Navigate to="/" replace />;
+}
+
