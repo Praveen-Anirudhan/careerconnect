@@ -35,9 +35,9 @@ export function* handleSignUp(action: PayloadAction<{ email: string; password: s
         const {email, password, role} = action.payload;
         const response = yield call(registerUser, {email, password, role});
         const user: User = {
-            id: response?.data?.register?.user?.id,
-            role: response?.data?.register?.user?.role,
-            token: response?.data?.register?.token,
+            id: response?.user?.id,
+            role: response?.user?.role,
+            token: response?.token,
         }
         setAuthToken(user?.token);
         yield put(signUpSuccess(user));

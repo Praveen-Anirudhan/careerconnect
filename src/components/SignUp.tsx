@@ -1,25 +1,39 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Briefcase, MoveLeft} from "lucide-react";
 import {Link, useNavigate} from "react-router-dom";
 import {signUpRequest} from "../redux/features/auth/authSlice.ts";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {useAuth} from "../hooks/useAuth.ts";
+import {isAuthenticated} from "../services/tokenService.ts";
+import {selectLoading, selectUser} from "../redux/features/auth/selector.ts";
 
 const SignUp = () => {
 
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
+    const [loading, setLoading] = useState<boolean>(false);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const user = useSelector(selectUser);
+    const loadingS = useSelector(selectLoading);
+    const {signUp} = useAuth();
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         try{
-            dispatch(signUpRequest({email, password, role: 'RECRUITER'}))
-            navigate('/recruiter/dashboard')
+            dispatch(signUpRequest({email, password, role: 'RECRUITER'}));
+            setLoading(true);
         } catch (error) {
             console.error(error)
         }
     }
+
+    useEffect(() => {
+        if (isAuthenticated() && user?.token ) {
+            signUp(user?.token)
+            navigate('/recruiter/dashboard');
+        }
+    }, [user, navigate]);
 
     return (
         <div className="flex flex-col justify-center items-center sm:min-h-screen overflow-y-auto">
@@ -70,11 +84,12 @@ const SignUp = () => {
 
                     <button
                         type="submit"
-                        className={`w-full flex justify-center items-center gap-2 bg-cyan-600 text-white py-3 rounded-lg hover:bg-cyan-700 transition mt-6`}
+                        className={`w-full flex justify-center items-center gap-2 bg-cyan-600 text-white py-3 rounded-lg 
+                        hover:bg-cyan-700 transition mt-6 ${loading ? 'opacity-70 cursor-not-allowed' : ''}`}
                         onClick={handleSubmit}
                         disabled={!email || !password}
                     >
-                        Sign Up
+                        {loadingS ? 'Signing up...' : 'Sign Up'}
                     </button>
                 </form>
 

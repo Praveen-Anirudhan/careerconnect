@@ -1,5 +1,4 @@
 import { graphqlRequest } from "../utils/api";
-import { setAuthToken } from "./tokenService";
 import { LOGIN_MUTATION, REGISTER_MUTATION } from "./api";
 import type { RegisterInput, RegisterResponse, LoginInput, LoginResponse } from "../types/authTypes";
 
@@ -14,8 +13,7 @@ export const registerUser = async ({email, password, role}: RegisterInput) => {
     }
 
     if (result.data?.register?.token) {
-        setAuthToken(result.data.register.token);
-        return result.data.register;
+        return result?.data?.register;
     }
 
     throw new Error("Registration failed: No token received");
