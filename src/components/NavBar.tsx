@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import { Briefcase, User } from "lucide-react";
 
 const NavBar = () => {
@@ -9,30 +9,27 @@ const NavBar = () => {
         <nav className="sticky top-0 z-50 w-full border-b border-gray-200 bg-white/95">
             <div className="flex h-16 items-center justify-between px-4 lg:px-8">
 
-                <a href="#home" className="flex items-center gap-2 flex-shrink-0">
+                <Link to="home" className="flex items-center gap-2 flex-shrink-0">
                     <Briefcase className="h-8 w-8 text-cyan-500" />
                     <span className="text-xl font-bold text-gray-600">CareerConnect</span>
-                </a>
+                </Link>
 
                 <div className="hidden md:flex items-center gap-12 absolute left-1/2 transform -translate-x-1/2">
-                    <a
-                        href="#home"
+                    <Link to="#home"
                         className="text-sm font-medium transition-colors hover:text-cyan-500 text-gray-600"
                     >
                         Home
-                    </a>
-                    <a
-                        href="#jobs"
+                    </Link>
+                    <Link to="jobs"
                         className="text-sm font-medium transition-colors hover:text-cyan-500 text-gray-600"
                     >
                         Jobs
-                    </a>
-                    <a
-                        href="#my-applications"
+                    </Link>
+                    <Link to="my-applications"
                         className="text-sm font-medium transition-colors hover:text-cyan-500 text-gray-600"
                     >
                         My Applications
-                    </a>
+                    </Link>
                 </div>
 
                 <div className="flex items-center gap-3">
