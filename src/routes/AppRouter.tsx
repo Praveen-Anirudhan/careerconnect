@@ -12,6 +12,7 @@ import NotFound from "../pages/NotFound";
 import Dashboard from "../pages/Recruiter/Dashboard";
 import type {JSX} from "react";
 import {useAuth} from "../hooks/useAuth.ts";
+import SignUp from "../pages/Recruiter/SignUp";
 
 export default function AppRouter() {
     return (
