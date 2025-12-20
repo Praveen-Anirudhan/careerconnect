@@ -4,6 +4,7 @@ export const REGISTER_MUTATION = `
       token
       user {
         id
+        role
       }
     }
   }

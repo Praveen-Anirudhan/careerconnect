@@ -3,7 +3,7 @@ import { setAuthToken } from "./tokenService";
 import { LOGIN_MUTATION, REGISTER_MUTATION } from "./api";
 import type { RegisterInput, RegisterResponse, LoginInput, LoginResponse } from "../types/authTypes";
 
-export const register = async ({ email, password, role }: RegisterInput) => {
+export const registerUser = async ({email, password, role}: RegisterInput) => {
     const result = await graphqlRequest<RegisterInput, RegisterResponse>({
         query: REGISTER_MUTATION,
         variables: { email, password, role },
@@ -21,7 +21,7 @@ export const register = async ({ email, password, role }: RegisterInput) => {
     throw new Error("Registration failed: No token received");
 };
 
-export const loginUser = async (email: string, password: string) => {
+export const loginUser = async ({email, password}: LoginInput) => {
     const result = await graphqlRequest<LoginInput, LoginResponse>({
         query: LOGIN_MUTATION,
         variables: { email, password },

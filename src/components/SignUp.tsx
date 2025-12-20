@@ -1,25 +1,25 @@
-import {type FormEvent, useState} from 'react';
+import React, {useState} from 'react';
 import {Briefcase, MoveLeft} from "lucide-react";
 import {Link, useNavigate} from "react-router-dom";
-import {loginRequest} from "../redux/features/auth/authSlice.ts";
-import {useDispatch, useSelector} from "react-redux";
-import {useAuth} from "../hooks/useAuth.ts";
+import {signUpRequest} from "../redux/features/auth/authSlice.ts";
+import {useDispatch} from "react-redux";
 
 const SignUp = () => {
 
-    const [email, setEmail] = useState();
-    const [password, setPassword] = useState();
+    const [email, setEmail] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
-    const handleSubmit = async (e: FormEvent) => {
+    const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        try {
-            dispatch(loginRequest({email, password}))
-            setLoading(true);
+        try{
+            dispatch(signUpRequest({email, password, role: 'RECRUITER'}))
+            navigate('/recruiter/dashboard')
         } catch (error) {
-            console.error(error);
+            console.error(error)
         }
-    };
+    }
 
     return (
         <div className="flex flex-col justify-center items-center sm:min-h-screen overflow-y-auto">
@@ -37,7 +37,7 @@ const SignUp = () => {
                 <form className="">
                     <div className="flex flex-col gap-2">
                         <p className="text-3xl font-bold">Welcome Back</p>
-                        <p className="text-black/40">Sign in to your recruiter account</p>
+                        <p className="text-black/40">Sign Up to your recruiter account</p>
                     </div>
 
                     <div className="flex flex-col pt-6 gap-1">
@@ -70,13 +70,11 @@ const SignUp = () => {
 
                     <button
                         type="submit"
-                        className={`w-full flex justify-center items-center gap-2 bg-cyan-600 text-white py-3 rounded-lg hover:bg-cyan-700 transition mt-6 ${
-                            loadingS ? 'opacity-70 cursor-not-allowed' : ''
-                        }`}
+                        className={`w-full flex justify-center items-center gap-2 bg-cyan-600 text-white py-3 rounded-lg hover:bg-cyan-700 transition mt-6`}
                         onClick={handleSubmit}
-                        disabled={!email || !password || loading}
+                        disabled={!email || !password}
                     >
-                        {loadingS ? 'Signing in...' : 'Sign in' }
+                        Sign Up
                     </button>
                 </form>
 
