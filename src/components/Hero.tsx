@@ -1,5 +1,5 @@
 import { ArrowRight} from 'lucide-react';
-import SearchBar from './SearchBar.tsx';
+import {SearchBar} from './SearchBar.tsx';
 import { heroImage } from '../../public/images/images.tsx';
 
 const Hero = () => {

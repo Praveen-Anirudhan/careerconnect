@@ -1,10 +1,10 @@
 import { Search, MapPin } from "lucide-react";
 
-interface SearchBarProps{
-    searchQuery: string;
-    setSearchQuery: (query: string) => void;
-    locationQuery: string;
-    setLocationQuery: (query: string) => void;
+export interface SearchBarProps{
+    searchQuery?: string;
+    setSearchQuery?: (query: string) => void;
+    locationQuery?: string;
+    setLocationQuery?: (query: string) => void;
 }
 
 export const SearchBar = ({searchQuery, setSearchQuery, locationQuery, setLocationQuery}: SearchBarProps) => (
@@ -16,7 +16,7 @@ export const SearchBar = ({searchQuery, setSearchQuery, locationQuery, setLocati
                     type="text"
                     placeholder="Job title, keywords..."
                     value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
+                    onChange={(e) => setSearchQuery?.(e.target.value)}
                     className="flex-1 outline-none text-sm"
                 />
             </div>
@@ -26,7 +26,7 @@ export const SearchBar = ({searchQuery, setSearchQuery, locationQuery, setLocati
                     type="text"
                     placeholder="City or remote"
                     value={locationQuery}
-                    onChange={(e) => setLocationQuery(e.target.value)}
+                    onChange={(e) => setLocationQuery?.(e.target.value)}
                     className="flex-1 outline-none text-sm"
                 />
             </div>
