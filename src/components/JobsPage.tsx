@@ -1,9 +1,8 @@
 import { useState } from "react";
-import JobCard from "../../components/JobCard";
-import { filteredJobs } from "../../utils/filterJobs";
-import type {Job} from "../../data/jobs";
-import jobs from "../../data/jobs";
-import {SearchBar} from "../../components/SearchBar";
+import JobCard from "./JobCard";
+import type {Job} from "../data/jobs";
+import {filteredJobs} from "../utils/filterJobs.ts";
+import {SearchBar} from "./SearchBar";
 
 const JobsPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -11,37 +10,22 @@ const JobsPage = () => {
   const [selectedJobType, setSelectedJobType] = useState<string[]>([]);
   const [selectedLocation, setSelectedLocation] = useState<string[]>([]);
 
-  const locationData = ["Remote", "San Francisco, CA", "New York, NY", "Austin, TX", "Seattle, WA"]
 
   const handleJobTypeChange = (type: string) => {
-    setSelectedJobType((prev) =>
-      prev.includes(type) ? prev.filter((t) => t !== type) : [...prev, type]
+    setSelectedJobType(prev =>
+        prev.includes(type)
+            ? prev.filter(item => item !== type)
+            : [...prev, type]
     );
   };
 
   const handleLocationChange = (location: string) => {
-    setSelectedLocation((prev) =>
-      prev.includes(location)
-        ? prev.filter((l) => l !== location)
-        : [...prev, location]
+    setSelectedLocation(prev =>
+        prev.includes(location)
+            ? prev.filter(item => item !== location)
+            : [...prev, location]
     );
   };
-
-  const filteredJobsList = filteredJobs({
-    searchQuery,
-    locationQuery,
-    selectedJobType,
-    selectedLocation
-  });
-
-  const hasActiveFilters =
-      searchQuery ||
-      locationQuery ||
-      selectedJobType.length > 0 ||
-      selectedLocation.length > 0;
-
-  const jobsCount = hasActiveFilters ? filteredJobsList.length : jobs.length;
-  const showNoJobsMessage = jobsCount === 0;
 
   return (
     <div className="bg-gray-50 min-h-screen">
@@ -87,7 +71,13 @@ const JobsPage = () => {
               <div>
                 <h3 className="font-semibold text-gray-900 mb-4">Location</h3>
                 <div className="space-y-2">
-                  {locationData.map((location) => (
+                  {[
+                    "Remote",
+                    "San Francisco, CA",
+                    "New York, NY",
+                    "Austin, TX",
+                    "Seattle, WA",
+                  ].map((location) => (
                     <label
                       key={location}
                       className="flex items-center gap-2 cursor-pointer"
@@ -107,19 +97,12 @@ const JobsPage = () => {
           </div>
 
           {/* Jobs Grid */}
-
           <div className="flex-1">
-            {showNoJobsMessage ? (
-                <p className="text-gray-600">No jobs found</p>
-            ): (
-              <p className="text-gray-600 mb-6">
-                Showing {jobsCount} {hasActiveFilters ? 'filtered ' : ''}jobs
-              </p>
-            )}
+            <p className="text-gray-600 mb-6">
+              Showing {filteredJobs.length} jobs
+            </p>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              {filteredJobs(
-                  {searchQuery, locationQuery,
-                    selectedJobType, selectedLocation}).map((job:Job, index:number) => (
+              {filteredJobs({searchQuery, locationQuery, selectedJobType, selectedLocation}).map((job:Job, index:number) => (
                 <JobCard key={index} job={job} />
               ))}
             </div>
