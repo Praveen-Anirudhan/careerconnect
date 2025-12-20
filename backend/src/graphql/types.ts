@@ -7,6 +7,7 @@ export interface JobInput {
     jobType: string;
     requirements: string;
     skills: string;
+    responsibilities: string;
 }
 
 export interface AuthContext {
