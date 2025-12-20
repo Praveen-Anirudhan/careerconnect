@@ -5,7 +5,6 @@ import type {Job} from "../../data/jobs";
 import {SearchBar} from "../../components/SearchBar";
 
 const JobsPage = () => {
-  console.log("jobspage");
   const [searchQuery, setSearchQuery] = useState("");
   const [locationQuery, setLocationQuery] = useState("");
   const [selectedJobType, setSelectedJobType] = useState<string[]>([]);
