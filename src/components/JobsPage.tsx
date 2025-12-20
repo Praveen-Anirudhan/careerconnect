@@ -1,7 +1,8 @@
-import React, { useState } from "react";
-import { Search, MapPin } from "lucide-react";
+import { useState } from "react";
 import JobCard from "./JobCard";
-import jobs from "../data/jobs";
+import type {Job} from "../data/jobs";
+import {filteredJobs} from "../utils/filterJobs.ts";
+import {SearchBar} from "./SearchBar";
 
 const JobsPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -9,37 +10,22 @@ const JobsPage = () => {
   const [selectedJobType, setSelectedJobType] = useState<string[]>([]);
   const [selectedLocation, setSelectedLocation] = useState<string[]>([]);
 
-  const filteredJobs = jobs.filter((job) => {
-    const matchesSearch =
-      job.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      job.company.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesLocation =
-      locationQuery === "" ||
-      job.location.toLowerCase().includes(locationQuery.toLowerCase());
-    const matchesJobType =
-      selectedJobType.length === 0 || selectedJobType.includes(job.type);
-    const matchesLocationFilter =
-      selectedLocation.length === 0 ||
-      selectedLocation.some((loc) => job.location.includes(loc));
 
-    return (
-      matchesSearch &&
-      matchesLocation &&
-      matchesJobType &&
-      matchesLocationFilter
-    );
-  });
-
-  const toggle = (value: string, setFn: React.Dispatch<React.SetStateAction<string[]>>) => {
-    setFn((prev: string[]) =>
-        prev.includes(value)
-            ? prev.filter(item => item !== value)
-            : [...prev, value]
+  const handleJobTypeChange = (type: string) => {
+    setSelectedJobType(prev =>
+        prev.includes(type)
+            ? prev.filter(item => item !== type)
+            : [...prev, type]
     );
   };
 
-  const handleJobTypeChange = (type: string) => toggle(type, setSelectedJobType);
-  const handleLocationChange = (loc: string) => toggle(loc, setSelectedLocation);
+  const handleLocationChange = (location: string) => {
+    setSelectedLocation(prev =>
+        prev.includes(location)
+            ? prev.filter(item => item !== location)
+            : [...prev, location]
+    );
+  };
 
   return (
     <div className="bg-gray-50 min-h-screen">
@@ -49,34 +35,12 @@ const JobsPage = () => {
         </h1>
 
         {/* Search Bar */}
-        <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
-          <div className="grid md:grid-cols-3 gap-4">
-            <div className="flex items-center gap-3 p-3 border border-gray-300 rounded-lg">
-              <Search className="h-5 w-5 text-gray-400" />
-              <input
-                type="text"
-                placeholder="Job title, keywords..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="flex-1 outline-none text-sm"
-              />
-            </div>
-            <div className="flex items-center gap-3 p-3 border border-gray-300 rounded-lg">
-              <MapPin className="h-5 w-5 text-gray-400" />
-              <input
-                type="text"
-                placeholder="City or remote"
-                value={locationQuery}
-                onChange={(e) => setLocationQuery(e.target.value)}
-                className="flex-1 outline-none text-sm"
-              />
-            </div>
-            <button className="bg-cyan-600 text-white rounded-lg px-6 py-3 font-medium hover:bg-cyan-700 transition-colors flex items-center justify-center gap-2">
-              <Search className="h-5 w-5" />
-              Search Jobs
-            </button>
-          </div>
-        </div>
+        <SearchBar
+            searchQuery={searchQuery}
+            setSearchQuery={setSearchQuery}
+            locationQuery={locationQuery}
+            setLocationQuery={setLocationQuery}
+        />
 
         <div className="flex gap-8">
           {/* Filters Sidebar */}
@@ -138,7 +102,7 @@ const JobsPage = () => {
               Showing {filteredJobs.length} jobs
             </p>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              {filteredJobs.map((job, index) => (
+              {filteredJobs({searchQuery, locationQuery, selectedJobType, selectedLocation}).map((job:Job, index:number) => (
                 <JobCard key={index} job={job} />
               ))}
             </div>

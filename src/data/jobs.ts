@@ -1,4 +1,15 @@
- const jobs = [
+export interface Job {
+  title: string,
+  company: string,
+  type : string,
+  description: string,
+  location: string,
+  salary: string,
+  posted: string,
+  skills: string[],
+}
+
+const jobs = [
     {
       title: 'Senior Frontend Developer',
       company: 'TechCorp Inc.',
