@@ -15,11 +15,11 @@ export const jobResolvers = {
                 throw new Error("Unauthorized");
             }
 
-            const {title, description, company, location, salaryRange, jobType, requirements, skills} = input;
+            const {title, jobDescription, company, location, salaryRange, jobType, requirements, skills} = input;
             try {
                 const [newJob] = await sql`
                     INSERT INTO jobs (title,
-                                      description,
+                                      jobDescription,
                                       company,
                                       location,
                                       salaryRange,
@@ -28,7 +28,7 @@ export const jobResolvers = {
                                       skills,
                                       posted_by)
                     VALUES (${title},
-                            ${description}
+                            ${jobDescription}
                             ${company}
                             ${location}
                             ${salaryRange}

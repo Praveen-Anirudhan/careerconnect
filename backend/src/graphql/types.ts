@@ -1,6 +1,6 @@
 export interface JobInput {
     title: string;
-    description: string;
+    jobDescription: string;
     company: string;
     location: string;
     salaryRange: string;
