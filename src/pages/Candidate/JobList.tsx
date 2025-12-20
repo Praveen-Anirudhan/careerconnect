@@ -2,6 +2,7 @@ import { useState } from "react";
 import JobCard from "../../components/JobCard";
 import { filteredJobs } from "../../utils/filterJobs";
 import type {Job} from "../../data/jobs";
+import jobs from "../../data/jobs";
 import {SearchBar} from "../../components/SearchBar";
 
 const JobsPage = () => {
@@ -25,6 +26,22 @@ const JobsPage = () => {
         : [...prev, location]
     );
   };
+
+  const filteredJobsList = filteredJobs({
+    searchQuery,
+    locationQuery,
+    selectedJobType,
+    selectedLocation
+  });
+
+  const hasActiveFilters =
+      searchQuery ||
+      locationQuery ||
+      selectedJobType.length > 0 ||
+      selectedLocation.length > 0;
+
+  const jobsCount = hasActiveFilters ? filteredJobsList.length : jobs.length;
+  const showNoJobsMessage = jobsCount === 0;
 
   return (
     <div className="bg-gray-50 min-h-screen">
@@ -90,12 +107,19 @@ const JobsPage = () => {
           </div>
 
           {/* Jobs Grid */}
+
           <div className="flex-1">
-            <p className="text-gray-600 mb-6">
-              Showing {filteredJobs.length} jobs
-            </p>
+            {showNoJobsMessage ? (
+                <p className="text-gray-600">No jobs found</p>
+            ): (
+              <p className="text-gray-600 mb-6">
+                Showing {jobsCount} {hasActiveFilters ? 'filtered ' : ''}jobs
+              </p>
+            )}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              {filteredJobs({searchQuery, locationQuery, selectedJobType, selectedLocation}).map((job:Job, index:number) => (
+              {filteredJobs(
+                  {searchQuery, locationQuery,
+                    selectedJobType, selectedLocation}).map((job:Job, index:number) => (
                 <JobCard key={index} job={job} />
               ))}
             </div>

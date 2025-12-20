@@ -24,8 +24,8 @@ export default function AppRouter() {
 
             <Route path="/recruiter/dashboard" element={
                 <ProtectedRoute>
-                        <Dashboard />
-                    </ProtectedRoute>
+                    <Dashboard />
+                </ProtectedRoute>
                 }
             />
             <Route path="/recruiter/login" element={<Login />} />
