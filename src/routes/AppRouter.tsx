@@ -9,6 +9,7 @@ import PostJob from "../pages/Recruiter/PostJob";
 import Applicants from "../pages/Recruiter/Applicants";
 import Login from "../pages/Recruiter/Login";
 import NotFound from "../pages/NotFound";
+import SignUp from "../pages/Recruiter/SignUp";
 
 export default function AppRouter() {
     return (
@@ -20,6 +21,7 @@ export default function AppRouter() {
             <Route path="/applications" element={<MyApplications />} />
 
             <Route path="/recruiter/login" element={<Login />} />
+            <Route path="/recruiter/signup" element={<SignUp />} />
             <Route path="/recruiter/dashboard" element={<RecruiterDashboard />} />
             <Route path="/recruiter/post" element={<PostJob />} />
             <Route path="/recruiter/applicants/:jobId" element={<Applicants />} />
