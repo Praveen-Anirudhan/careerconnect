@@ -7,6 +7,7 @@ import {selectLoading, selectUser} from "../redux/features/auth/selector.ts";
 import { useNavigate } from 'react-router-dom';
 import {isAuthenticated} from "../services/tokenService";
 import {useAuth} from "../hooks/useAuth.ts";
+import {Link} from "react-router-dom";
 
 const LoginForm = () => {
     const [email, setEmail] = useState('');
@@ -97,10 +98,10 @@ const LoginForm = () => {
                 <div className="mt-4 flex flex-col gap-4 text-center">
                     <p className="text-cyan-600 hover:underline cursor-pointer">Forgot password?</p>
 
-                    <div className="flex flex-row gap-2 justify-center items-center">
+                  <Link to"/recruiter/signup" className="flex flex-row gap-2 justify-center items-center">
                         <MoveLeft className="text-cyan-600"/>
-                        <p className="text-cyan-600 hover:underline cursor-pointer">Back to candidate portal</p>
-                    </div>
+                        <p className="text-cyan-600 hover:underline cursor-pointer">Don't have an account?</p>
+                  </Link>
                 </div>
             </div>
 
