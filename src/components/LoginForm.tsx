@@ -99,7 +99,7 @@ const LoginForm = () => {
                     <p className="text-cyan-600 hover:underline cursor-pointer">Forgot password?</p>
                   <Link to="/recruiter/signup" className="flex flex-row gap-2 justify-center items-center">
                       <MoveLeft className="text-cyan-600"/>
-                      <p className="text-cyan-600 hover:underline cursor-pointer">Don't have an account?</p>
+                      <p className="text-cyan-600 hover:underline cursor-pointer">Don't have an account? Sign Up!!</p>
                   </Link>
 
                 </div>
