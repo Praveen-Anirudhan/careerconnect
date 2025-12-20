@@ -22,6 +22,10 @@ export function* handleLogin(action: PayloadAction<{ email: string; password: st
     }
 }
 
+export function* handleSignUp(action: PayloadAction<{ email: string; password: string }>): Generator{
+
+}
+
 export function* handleLogout() {
     try {
         yield put(logout());
