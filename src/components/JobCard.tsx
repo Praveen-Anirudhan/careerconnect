@@ -1,4 +1,4 @@
-import { MapPin, DollarSign, Clock } from 'lucide-react';
+import { MapPin, DollarSign, Clock } from "lucide-react";
 // Remove this line - you don't need to import jobs in JobCard
 // import job from '../data/jobs';
 
@@ -15,7 +15,7 @@ interface Job {
 
 const JobCard = ({ job }: { job: Job }) => {
   return (
-    <div className="bg-white rounded-lg border border-gray-200 p-6 hover:shadow-lg transition-shadow">
+    <div className="bg-white rounded-lg border border-gray-200 p-6 hover:shadow-lg transition-shadow flex flex-col h-full">
       {/* Header */}
       <div className="flex justify-between items-start mb-4">
         <h3 className="text-xl font-semibold text-gray-900">{job.title}</h3>
@@ -28,7 +28,9 @@ const JobCard = ({ job }: { job: Job }) => {
       <p className="text-gray-700 font-medium mb-3">{job.company}</p>
 
       {/* Description */}
-      <p className="text-gray-600 text-sm mb-4 line-clamp-2">{job.description}</p>
+      <p className="text-gray-600 text-sm mb-4 line-clamp-2">
+        {job.description}
+      </p>
 
       {/* Job Details */}
       <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600 mb-4">
@@ -59,7 +61,7 @@ const JobCard = ({ job }: { job: Job }) => {
       </div>
 
       {/* Actions */}
-      <div className="flex gap-3">
+      <div className="flex gap-3  mt-auto">
         <button className="flex-1 px-8 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 transition-colors font-medium">
           View Details
         </button>
