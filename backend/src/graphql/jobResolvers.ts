@@ -28,12 +28,12 @@ export const jobResolvers = {
                                       skills,
                                       posted_by)
                     VALUES (${title},
-                            ${jobDescription}
-                            ${company}
-                            ${location}
-                            ${salaryRange}
-                            ${jobType}
-                            ${requirements}
+                            ${jobDescription},
+                            ${company},
+                            ${location},
+                            ${salaryRange},
+                            ${jobType},
+                            ${requirements},
                             ${skills}) 
                     RETURNING * `;
             return {
