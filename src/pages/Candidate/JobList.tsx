@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Search, MapPin } from "lucide-react";
 import JobCard from "../../components/JobCard";
-import jobs from "../../data/jobs";
+import { filteredJobs } from "../../utils/filterJobs";
+import type {Job} from "../../data/jobs";
 
 const JobsPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -10,27 +11,6 @@ const JobsPage = () => {
   const [selectedLocation, setSelectedLocation] = useState<string[]>([]);
 
   const locationData = ["Remote", "San Francisco, CA", "New York, NY", "Austin, TX", "Seattle, WA"]
-
-  const filteredJobs = jobs.filter((job) => {
-    const matchesSearch =
-      job.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      job.company.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesLocation =
-      locationQuery === "" ||
-      job.location.toLowerCase().includes(locationQuery.toLowerCase());
-    const matchesJobType =
-      selectedJobType.length === 0 || selectedJobType.includes(job.type);
-    const matchesLocationFilter =
-      selectedLocation.length === 0 ||
-      selectedLocation.some((loc) => job.location.includes(loc));
-
-    return (
-      matchesSearch &&
-      matchesLocation &&
-      matchesJobType &&
-      matchesLocationFilter
-    );
-  });
 
   const handleJobTypeChange = (type: string) => {
     setSelectedJobType((prev) =>
@@ -137,8 +117,8 @@ const JobsPage = () => {
               Showing {filteredJobs.length} jobs
             </p>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              {filteredJobs.map((job, index) => (
-                <JobCard key={index} job={job} />
+              {filteredJobs({searchQuery, locationQuery, selectedJobType, selectedLocation}).map((job:Job) => (
+                <JobCard job={job} />
               ))}
             </div>
           </div>
