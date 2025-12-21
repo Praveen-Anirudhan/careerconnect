@@ -1,7 +1,7 @@
 export interface User {
     id: string;
-    role: string;
     token: string;
+    role?: string;
 }
 
 export interface AuthState {
@@ -10,4 +10,5 @@ export interface AuthState {
     error: string | null;
     email: string | null;
     password: string | null;
+    role: string | null;
 }

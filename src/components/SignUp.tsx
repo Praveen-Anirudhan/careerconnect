@@ -1,42 +1,41 @@
+import React, {useEffect, useState} from 'react';
 import {Briefcase, MoveLeft} from "lucide-react";
-import { useState, useEffect, type FormEvent } from 'react';
-import {loginRequest} from "../redux/features/auth/authSlice.ts";
-import {useDispatch} from "react-redux";
-import { useSelector } from 'react-redux';
-import {selectLoading, selectUser} from "../redux/features/auth/selector.ts";
-import { useNavigate } from 'react-router-dom';
-import {isAuthenticated} from "../services/tokenService";
+import {Link, useNavigate} from "react-router-dom";
+import {signUpRequest} from "../redux/features/auth/authSlice.ts";
+import {useDispatch, useSelector} from "react-redux";
 import {useAuth} from "../hooks/useAuth.ts";
-import {Link} from "react-router-dom";
+import {isAuthenticated} from "../services/tokenService.ts";
+import {selectLoading, selectUser} from "../redux/features/auth/selector.ts";
 
-const LoginForm = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [loading, setLoading] = useState(false);
+const SignUp = () => {
+
+    const [email, setEmail] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
+    const [loading, setLoading] = useState<boolean>(false);
     const dispatch = useDispatch();
-    const loadingS = useSelector(selectLoading);
-    const user = useSelector(selectUser);
     const navigate = useNavigate();
-    const {login} = useAuth();
+    const user = useSelector(selectUser);
+    const loadingS = useSelector(selectLoading);
+    const {signUp} = useAuth();
 
-    const handleSubmit = async (e: FormEvent) => {
+    const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        try {
-            dispatch(loginRequest({email, password}))
+        try{
+            dispatch(signUpRequest({email, password, role: 'RECRUITER'}));
             setLoading(true);
         } catch (error) {
-            console.error(error);
+            console.error(error)
         }
-    };
+    }
 
     useEffect(() => {
-        if (isAuthenticated() && user?.token) {
-            login(user?.token)
+        if (isAuthenticated() && user?.token ) {
+            signUp(user?.token)
             navigate('/recruiter/dashboard');
         }
     }, [user, navigate]);
 
-        return(
+    return (
         <div className="flex flex-col justify-center items-center sm:min-h-screen overflow-y-auto">
 
             <div className="flex flex-col items-center gap-2 py-8">
@@ -52,7 +51,7 @@ const LoginForm = () => {
                 <form className="">
                     <div className="flex flex-col gap-2">
                         <p className="text-3xl font-bold">Welcome Back</p>
-                        <p className="text-black/40">Sign in to your recruiter account</p>
+                        <p className="text-black/40">Sign Up to your recruiter account</p>
                     </div>
 
                     <div className="flex flex-col pt-6 gap-1">
@@ -85,22 +84,21 @@ const LoginForm = () => {
 
                     <button
                         type="submit"
-                        className={`w-full flex justify-center items-center gap-2 bg-cyan-600 text-white py-3 rounded-lg hover:bg-cyan-700 transition mt-6 ${
-                            loadingS ? 'opacity-70 cursor-not-allowed' : ''
-                        }`}
+                        className={`w-full flex justify-center items-center gap-2 bg-cyan-600 text-white py-3 rounded-lg 
+                        hover:bg-cyan-700 transition mt-6 ${loading ? 'opacity-70 cursor-not-allowed' : ''}`}
                         onClick={handleSubmit}
-                        disabled={!email || !password || loading}
+                        disabled={!email || !password}
                     >
-                        {loadingS ? 'Signing in...' : 'Sign in' }
+                        {loadingS ? 'Signing up...' : 'Sign Up'}
                     </button>
                 </form>
 
                 <div className="mt-4 flex flex-col gap-4 text-center">
                     <p className="text-cyan-600 hover:underline cursor-pointer">Forgot password?</p>
-                  <Link to="/recruiter/signup" className="flex flex-row gap-2 justify-center items-center">
-                      <MoveLeft className="text-cyan-600"/>
-                      <p className="text-cyan-600 hover:underline cursor-pointer">Don't have an account? Sign Up!!</p>
-                  </Link>
+                    <Link to="/recruiter/login" className="flex flex-row gap-2 justify-center items-center">
+                        <MoveLeft className="text-cyan-600"/>
+                        <p className="text-cyan-600 hover:underline cursor-pointer">Already have a account? Login</p>
+                    </Link>
 
                 </div>
 
@@ -109,4 +107,4 @@ const LoginForm = () => {
     )
 }
 
-export default LoginForm
+export default SignUp;
