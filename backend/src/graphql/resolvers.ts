@@ -39,7 +39,5 @@ export const resolvers = {
             user: safeUser(user as DBUser)
         };
     },
-    Mutation: {
-        ...jobResolvers.Mutation
-    },
+    createJob: jobResolvers.Mutation.createJob
 };

@@ -7,26 +7,27 @@ import { AuthContext } from "./types";
 export const jobResolvers = {
     Mutation: {
         createJob: async (
-            _parent: unknown,
             { input }: { input: JobInput },
-            context: AuthContext
+            // context: AuthContext
         ): Promise<Job> => {
 
-            const user = verifyToken(context.token);
-            if (!user) {
-                throw new Error("Unauthorized");
-            }
+            // const user = verifyToken(context.token);
+            // if (!user) {
+            //     throw new Error("Unauthorized");
+            // }
 
             const {
                 title,
-                jobDescription,
+                job_description,
                 company,
                 location,
-                salaryRange,
-                jobType,
+                salary_range,
+                job_type,
                 requirements,
                 skills,
-                responsibilities
+                responsibilities,
+                posted_by,
+                created_at
             } = input;
 
             try {
@@ -41,18 +42,21 @@ export const jobResolvers = {
                         requirements,
                         responsibilities,
                         skills,
-                        posted_by
+                        posted_by,
+                        created_at
                     )
                     VALUES (
                                ${title},
-                               ${jobDescription},
+                               ${job_description},
                                ${company},
                                ${location},
-                               ${salaryRange},
-                               ${jobType},
+                               ${salary_range},
+                               ${job_type},
                                ${requirements},
                                ${responsibilities},
                                ${skills},
+                               ${posted_by},
+                               ${created_at}
                            )
                         RETURNING *;
                 `;
@@ -60,16 +64,16 @@ export const jobResolvers = {
                 return {
                     id: newJob.id,
                     title: newJob.title,
-                    jobDescription: newJob.job_description,
+                    job_description: newJob.job_description,
                     company: newJob.company,
                     location: newJob.location,
-                    salaryRange: newJob.salary_range,
-                    jobType: newJob.job_type,
+                    salary_range: newJob.salary_range,
+                    job_type: newJob.job_type,
                     requirements: newJob.requirements,
                     responsibilities: newJob.responsibilities,
                     skills: newJob.skills,
-                    createdAt: newJob.created_at,
-                    postedBy: newJob.posted_by
+                    posted_by: newJob.posted_by,
+                    created_at: newJob.created_at,
                 };
             } catch (error) {
                 console.error("Error creating job:", error);

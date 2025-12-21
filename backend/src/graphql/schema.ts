@@ -10,14 +10,16 @@ export const schema = buildSchema(`
   type Job {
     id: ID!
     title: String!
-    description: String!
+    job_description: String!
     company: String!
     location: String!
-    salary: String!
+    salary_range: String!
+    job_type: String!
     requirements: String!
     skills: String!
-    postedBy: User!
-    createdAt: String!
+    posted_by: String!
+    created_at: String!
+    responsibilities: String!
   }
 
   type AuthPayload {
@@ -27,12 +29,16 @@ export const schema = buildSchema(`
   
   input JobInput {
       title: String!
-      description: String!
+      job_description: String!
       company: String!
       location: String!
-      salary: String!
+      salary_range: String!
+      job_type: String!
       requirements: String!
       skills: String!
+      posted_by: String!
+      responsibilities: String!
+      created_at: String!
   }
 
   type Query {
