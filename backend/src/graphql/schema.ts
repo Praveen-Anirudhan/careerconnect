@@ -50,6 +50,7 @@ export const schema = buildSchema(`
 
   type Query {
     users: [User!]!
+    jobs: [Job!]!
   }
 
   type Mutation {

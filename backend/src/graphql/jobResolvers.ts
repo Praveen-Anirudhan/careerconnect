@@ -5,6 +5,20 @@ import { JobInput } from "./types";
 // import { AuthContext } from "./types";
 
 export const jobResolvers = {
+    Query: {
+       jobs: async(): Promise<Job[]> => {
+           try{
+               const jobs = await sql`
+                    SELECT * FROM jobs
+                    ORDER BY created_at DESC;
+                `;
+                return jobs as Job[];
+           }catch(error){
+               console.error("Error fetching jobs:", error);
+               throw new Error("Failed to fetch jobs");
+           }
+       }
+    },
     Mutation: {
         createJob: async (
             { input }: { input: JobInput },
