@@ -1,10 +1,17 @@
+export enum JobType {
+    FULL_TIME = 'FULL_TIME',
+    PART_TIME = 'PART_TIME',
+    CONTRACT = 'CONTRACT',
+    INTERNSHIP = 'INTERNSHIP'
+}
+
 export interface JobInput {
     title: string;
     job_description: string;
     company: string;
     location: string;
     salary_range: string;
-    job_type: string;
+    job_type: JobType;
     requirements: string;
     skills: string;
     responsibilities: string;

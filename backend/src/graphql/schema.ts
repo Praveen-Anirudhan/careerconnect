@@ -7,6 +7,13 @@ export const schema = buildSchema(`
     role: String!
   }
   
+  enum JobType{
+    FULL_TIME
+    PART_TIME
+    CONTRACT 
+    INTERNSHIP
+  }
+  
   type Job {
     id: ID!
     title: String!
@@ -14,7 +21,7 @@ export const schema = buildSchema(`
     company: String!
     location: String!
     salary_range: String!
-    job_type: String!
+    job_type: JobType!
     requirements: String!
     skills: String!
     posted_by: String!
@@ -33,7 +40,7 @@ export const schema = buildSchema(`
       company: String!
       location: String!
       salary_range: String!
-      job_type: String!
+      job_type: JobType!
       requirements: String!
       skills: String!
       posted_by: String!
