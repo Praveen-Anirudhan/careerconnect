@@ -1,7 +1,7 @@
 export type RegisterInput = {
     email: string;
     password: string;
-    role: "RECRUITER";
+    role: string;
 };
 
 export type RegisterResponse = {
@@ -10,6 +10,7 @@ export type RegisterResponse = {
             token: string;
             user: {
                 id: string;
+                role: string;
             };
         };
     };
