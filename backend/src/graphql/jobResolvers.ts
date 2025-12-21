@@ -1,8 +1,8 @@
 import { sql } from "../db";
 import { Job } from "../models/job";
-// import { verifyToken } from "../auth/auth";
+import { verifyToken } from "../auth/auth";
 import { JobInput } from "./types";
-// import { AuthContext } from "./types";
+import { AuthContext } from "./types";
 
 export const jobResolvers = {
     Query: {
@@ -22,13 +22,13 @@ export const jobResolvers = {
     Mutation: {
         createJob: async (
             { input }: { input: JobInput },
-            // context: AuthContext
+            context: AuthContext
         ): Promise<Job> => {
 
-            // const user = verifyToken(context.token);
-            // if (!user) {
-            //     throw new Error("Unauthorized");
-            // }
+            const user = verifyToken(context.token);
+            if (!user) {
+                throw new Error("Unauthorized");
+            }
 
             const {
                 title,
