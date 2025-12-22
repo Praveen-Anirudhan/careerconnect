@@ -1,8 +1,8 @@
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { postJob } from './job';
-import { postJobSuccess, postJobFailure } from './jobSlice';
-import type {PostJobInput} from "./types.ts"; // Make sure to import these
+import {postJobSuccess, postJobFailure, postJobRequest} from './jobSlice';
+import type {PostJobInput} from "./types.ts";
 
 export function* postJobSaga(action: PayloadAction<PostJobInput>): Generator {
     try {
@@ -15,5 +15,5 @@ export function* postJobSaga(action: PayloadAction<PostJobInput>): Generator {
 }
 
 export function* watchPostJob() {
-    yield takeLatest('job/postJob', postJobSaga);
+    yield takeLatest(postJobRequest.type, postJobSaga);
 }
