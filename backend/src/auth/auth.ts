@@ -28,6 +28,7 @@ export function generateToken(user: { id: string }) {
         {
             sub: user.id,
             at: Date.now() / 1000,
+            iss: "careerconnect",
         },
         secret,
         {
@@ -36,3 +37,10 @@ export function generateToken(user: { id: string }) {
         }
     );
 }
+
+export function verifyToken(token: string) {
+    const secret = process.env.JWT_SECRET;
+    if (!secret) throw new Error("Missing JWT_SECRET environment variable");
+    return jwt.verify(token, secret);
+}
+

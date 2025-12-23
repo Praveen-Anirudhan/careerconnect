@@ -12,6 +12,7 @@ import { hashPassword, comparePassword } from "../utils/hash.ts";
 import { generateToken } from "../auth/auth.ts";
 import { findUserByEmail, createUser, safeUser, type DBUser } from "../utils/user.ts";
 import { sql } from "../db/index.ts";
+import { jobResolvers } from "./jobResolvers.ts";
 
 export const resolvers = {
     users: async () => {
@@ -37,5 +38,7 @@ export const resolvers = {
             token,
             user: safeUser(user as DBUser)
         };
-    }
+    },
+    jobs: jobResolvers.Query.jobs,
+    createJob: jobResolvers.Mutation.createJob
 };
