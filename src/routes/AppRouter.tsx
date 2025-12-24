@@ -1,4 +1,4 @@
-import {Routes, Route, Navigate} from "react-router-dom";
+import {Navigate, createBrowserRouter, RouterProvider} from "react-router-dom";
 import Home from "../pages/Home/Home";
 import JobList from "../pages/Candidate/JobList";
 import JobDetails from "../pages/Candidate/JobDetails";
@@ -15,29 +15,34 @@ import {useAuth} from "../hooks/useAuth.ts";
 import SignUp from "../pages/Recruiter/SignUp";
 
 export default function AppRouter() {
-    return (
-        <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/jobs" element={<JobList />} />
-            <Route path="/jobs/:id" element={<JobDetails />} />
-            <Route path="/apply/:id" element={<ApplyJob />} />
-            <Route path="/applications" element={<MyApplications />} />
 
-            <Route path="/recruiter/dashboard" element={
-                <ProtectedRoute>
-                    <Dashboard />
-                </ProtectedRoute>
-                }
-            />
-            <Route path="/recruiter/login" element={<Login />} />
-            <Route path="/recruiter/signup" element={<SignUp />} />
-            <Route path="/recruiter/dashboard" element={<RecruiterDashboard />} />
-            <Route path="/recruiter/post" element={<PostJob />} />
-            <Route path="/recruiter/applicants/:jobId" element={<Applicants />} />
+    const router = createBrowserRouter([
+            {
+                errorElement: <NotFound />,
+                children: [
+                    { path: "/", element: <Home/> },
+                    { path: "/jobs", element : <JobList/> },
+                    { path: "/jobs/:id", element : <JobDetails/> },
+                    { path: "/apply/:id", element : <ApplyJob/> },
+                    { path: "/applications", element : <MyApplications/> },
+                    { path: "/recruiter/login", element: <Login/>},
+                    { path: "/recruiter/signup", element: <SignUp/>},
+                    { path: "/recruiter/dashboard", element: <RecruiterDashboard/>},
+                    { path: "/recruiter/post", element: <PostJob/>},
+                    { path: "/recruiter/applicants/:jobId", element: <Applicants/>},
+                    {
+                        path: "/recruiter/dashboard",
+                        element: (
+                            <ProtectedRoute>
+                                <Dashboard />
+                            </ProtectedRoute>
+                        )
+                    },
+                ],
+            }
+        ])
 
-            <Route path="*" element={<NotFound />} />
-        </Routes>
-    );
+    return <RouterProvider router={router} />
 }
 
 function ProtectedRoute({ children }: { children: JSX.Element }) {
