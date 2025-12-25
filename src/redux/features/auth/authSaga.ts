@@ -8,7 +8,7 @@ import {
     signUpSuccess,
     signUpFailure
 } from './authSlice';
-import { loginUser, registerUser } from '../../../services/auth';
+import { loginUser, registerUser } from './auth';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import type {User} from './types'
 import {setAuthToken} from '../../../services/tokenService'
