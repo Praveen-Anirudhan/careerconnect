@@ -1,8 +1,8 @@
 import { createContext, useState, type ReactNode } from 'react';
-import { setAuthToken, removeAuthToken } from '../services/tokenService';
+import { setAuthToken, removeAuthToken, isAuthenticated } from '../services/tokenService';
 
 interface AuthContextType {
-    isAuthenticated: boolean | null;
+    isUserAuthenticated: boolean | null;
     login: (token: string) => void;
     logout: () => void;
     signUp: (token: string) => void;
@@ -12,35 +12,25 @@ const AuthContext = createContext<AuthContextType | null>(null);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
-    const getStoredAuth = (): boolean => {
-        try {
-            const stored = localStorage.getItem('isAuthenticated');
-            return stored === 'true';
-        } catch (error) {
-            console.error('Error reading authentication state:', error);
-            return false;
-        }
-    };
-
-    const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(getStoredAuth());
+    const [isUserAuthenticated, setIsUserAuthenticated] = useState<boolean | null>(isAuthenticated());
 
     const signUp = (token: string) => {
         setAuthToken(token);
-        setIsAuthenticated(true);
+        setIsUserAuthenticated(true);
     };
 
     const login = (token: string) => {
         setAuthToken(token);
-        setIsAuthenticated(true);
+        setIsUserAuthenticated(true);
     };
 
     const logout = () => {
         removeAuthToken();
-        setIsAuthenticated(false);
+        setIsUserAuthenticated(false);
     };
 
     return (
-        <AuthContext.Provider value={{ isAuthenticated, login, logout, signUp }}>
+        <AuthContext.Provider value={{ isUserAuthenticated, login, logout, signUp }}>
             {children}
         </AuthContext.Provider>
     );

@@ -41,7 +41,7 @@ export default function AppRouter() {
 }
 
 function ProtectedRoute({ children }: { children: JSX.Element }) {
-    const { isAuthenticated } = useAuth();
-    return isAuthenticated ? children : <Navigate to="/" replace />;
+    const { isUserAuthenticated } = useAuth();
+    return isUserAuthenticated ? children : <Navigate to="/" replace />;
 }
 
