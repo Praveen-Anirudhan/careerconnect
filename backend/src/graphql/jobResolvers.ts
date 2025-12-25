@@ -1,6 +1,6 @@
 import { sql } from "../db";
 import { Job } from "../models/job";
-import { verifyToken } from "../auth/auth";
+import { verifyToken } from "../utils/auth";
 import { JobInput } from "./types";
 import { AuthContext } from "./types";
 
