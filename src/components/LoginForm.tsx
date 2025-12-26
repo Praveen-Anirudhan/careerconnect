@@ -3,6 +3,7 @@ import { useState, useEffect, type FormEvent } from 'react';
 import {loginRequest} from "../redux/features/auth/authSlice.ts";
 import {useDispatch} from "react-redux";
 import { useSelector } from 'react-redux';
+import useSlowLoading from "../hooks/useSlowLoading.ts";
 import {selectLoading, selectUser} from "../redux/features/auth/selector.ts";
 import { useNavigate } from 'react-router-dom';
 import {isAuthenticated} from "../services/tokenService";
@@ -15,6 +16,7 @@ const LoginForm = () => {
     const [loading, setLoading] = useState(false);
     const dispatch = useDispatch();
     const loadingS = useSelector(selectLoading);
+    const isSlow = useSlowLoading(loadingS);
     const user = useSelector(selectUser);
     const navigate = useNavigate();
     const {login} = useAuth();
@@ -91,7 +93,9 @@ const LoginForm = () => {
                         onClick={handleSubmit}
                         disabled={!email || !password || loading}
                     >
-                        {loadingS ? 'Signing in...' : 'Sign in' }
+                        {loadingS && !isSlow && 'Signing in...' }
+                        {loadingS && isSlow && "Still working... Server is slow 😴"}
+                        {!loadingS && 'Sign in'}
                     </button>
                 </form>
 
