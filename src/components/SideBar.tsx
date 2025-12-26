@@ -1,13 +1,12 @@
 import {type ReactNode} from "react";
-import {useNavigate} from "react-router-dom";
 import {Briefcase, CirclePlus, File, LogOut, Users} from "lucide-react";
-import {removeAuthToken} from "../services/tokenService.ts";
 
 interface SideBarProps{
     onApplicantsClick? : () => void;
     onDashboardClick? : () => void;
     onPostJobClick?: () => void;
     onMyJobsClick?: () => void;
+    onLogout?: () => void;
 }
 
 interface MenuItem{
@@ -15,18 +14,12 @@ interface MenuItem{
     label: string;
 }
 
-const SideBar = ({ onApplicantsClick, onDashboardClick, onPostJobClick, onMyJobsClick }: SideBarProps) => {
-    const navigate = useNavigate();
+const SideBar = ({ onApplicantsClick, onDashboardClick, onPostJobClick, onMyJobsClick, onLogout }: SideBarProps) => {
     const menuItems = [
         { icon: <Briefcase size={24} />, label: "Dashboard" },
         { icon: <File size={24} />, label: "My Jobs" },
         { icon: <Users size={24} />, label: "Applicants" },
     ];
-
-    const handleLogout = () => {
-        removeAuthToken();
-        navigate('/');
-    }
 
     const onClick = ({label}: MenuItem) => {
         if(label === "Dashboard"){
@@ -68,7 +61,7 @@ const SideBar = ({ onApplicantsClick, onDashboardClick, onPostJobClick, onMyJobs
 
             <div className="flex flex-row items-center gap-2 m-6 hover:bg-gray-100 mt-auto py-4 rounded-lg px-4 border-t border-gray-300">
                 <LogOut className="text-cyan-600" size={24}/>
-                <button className="cursor-pointer" onClick={handleLogout}>Logout</button>
+                <button className="cursor-pointer" onClick={onLogout}>Logout</button>
             </div>
 
         </div>
