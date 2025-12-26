@@ -163,3 +163,8 @@ This backend provides:
 - Recruiter-only job management
 - Public job listing for candidates
 - Clean modular code with routes/controllers/middleware separation
+
+## **Deployment**
+
+- Backend is deployed in render: https://render.com/
+- Database is deployed in neon: https://neon.com/
