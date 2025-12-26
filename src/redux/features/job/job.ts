@@ -1,12 +1,14 @@
-import type { PostJobInput, PostJobResponse} from './types';
+import type { JobInput, PostJobResponse} from './types';
 import {graphqlRequest} from '../../../utils/api';
 import {POST_JOB} from './api';
 
-export const postJob = async (input: PostJobInput) => {
-    const result = await graphqlRequest<PostJobInput, PostJobResponse>({
+export const postJob = async (input: JobInput) => {
+    const result = await graphqlRequest<{input: JobInput}, PostJobResponse>({
         mutation: POST_JOB,
         token: localStorage.getItem('auth_token'),
-        variables: input
+        variables: {
+            input: input
+        }
     });
 
     if(result.errors){

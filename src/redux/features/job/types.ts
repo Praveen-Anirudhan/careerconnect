@@ -7,7 +7,7 @@ export const JobType =  {
 
 export type JobType = typeof JobType[keyof typeof JobType];
 
-export interface PostJobInput {
+export interface JobInput {
     title: string;
     job_description: string;
     company: string;

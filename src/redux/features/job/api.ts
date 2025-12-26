@@ -1,5 +1,5 @@
 export const POST_JOB = `
-  mutation CreateJob($input: PostJobInput!) {
+  mutation CreateJob($input: JobInput!) {
     createJob(input: $input) {
       id
       title
