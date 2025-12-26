@@ -7,8 +7,6 @@ import { AuthContext } from "./types";
 export const jobResolvers = {
        getJobs : async(_args: unknown, context: AuthContext): Promise<Job[]> => {
            try{
-               console.log("args", _args)
-               console.log("context", context);
                if(!context.token){
                    throw new Error("Unauthorized");
                }
