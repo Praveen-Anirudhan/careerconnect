@@ -1,19 +1,21 @@
+import {type ReactNode} from "react";
 import {useNavigate} from "react-router-dom";
 import {Briefcase, CirclePlus, File, LogOut, Users} from "lucide-react";
 import {removeAuthToken} from "../services/tokenService.ts";
 
 interface SideBarProps{
-    onApplicantsClick : () => void;
+    onApplicantsClick? : () => void;
     onDashboardClick? : () => void;
-    onPostJobClick: () => void;
+    onPostJobClick?: () => void;
+    onMyJobsClick?: () => void;
 }
 
 interface MenuItem{
-    icon: React.ReactNode;
+    icon: ReactNode;
     label: string;
 }
 
-const SideBar = ({ onApplicantsClick, onDashboardClick, onPostJobClick }: SideBarProps) => {
+const SideBar = ({ onApplicantsClick, onDashboardClick, onPostJobClick, onMyJobsClick }: SideBarProps) => {
     const navigate = useNavigate();
     const menuItems = [
         { icon: <Briefcase size={24} />, label: "Dashboard" },
@@ -30,7 +32,9 @@ const SideBar = ({ onApplicantsClick, onDashboardClick, onPostJobClick }: SideBa
         if(label === "Dashboard"){
             onDashboardClick?.();
         }else if(label === "Applicants"){
-            onApplicantsClick();
+            onApplicantsClick?.();
+        }else if(label === "My Jobs"){
+            onMyJobsClick?.();
         }
     }
 

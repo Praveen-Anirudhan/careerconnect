@@ -1,6 +1,10 @@
-const RecruiterJobs = () => {
+interface RecruiterJobsProps{
+    showMyJobs: boolean;
+}
+
+const RecruiterJobs = ({showMyJobs}: RecruiterJobsProps) => {
     return (
-        <div>Recruiter Jobs</div>
+        showMyJobs && <div>Recruiter Jobs</div>
     )
 }
 
