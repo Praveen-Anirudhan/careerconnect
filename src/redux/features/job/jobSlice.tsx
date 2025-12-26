@@ -1,6 +1,5 @@
 import {createSlice, type PayloadAction} from "@reduxjs/toolkit";
 import type { JobType } from './types';
-import type { JobInput } from './types';
 
 interface Job {
     id?: string;
@@ -33,7 +32,7 @@ const jobSlice = createSlice({
     name: 'job',
     initialState,
     reducers: {
-        postJobRequest: (state, action: PayloadAction<JobInput>) => {
+        postJobRequest: (state) => {
             state.loading = true;
             state.error = null;
         },

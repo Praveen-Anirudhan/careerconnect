@@ -5,17 +5,12 @@ type GraphQLRequestArgs<VariablesType> = {
     token?: string | null;
 };
 
-export async function graphqlRequest<VariablesType, ResponseType>(
-    { mutation,query, variables, token }: GraphQLRequestArgs<VariablesType>
-): Promise<ResponseType> {
-    const headers: HeadersInit = {
-        'Content-Type': 'application/json',
-    }
-
-    if(token){
-        headers['Authorization'] = `Bearer ${token}`;
-    }
-
+export async function graphqlRequest<VariablesType, ResponseType>({
+ mutation,
+ query,
+ variables,
+ token
+}: GraphQLRequestArgs<VariablesType>){
     const body = {
         query: query || mutation,
         variables
@@ -24,6 +19,7 @@ export async function graphqlRequest<VariablesType, ResponseType>(
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify(body),
     });

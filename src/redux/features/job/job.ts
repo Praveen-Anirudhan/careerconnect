@@ -3,6 +3,7 @@ import {graphqlRequest} from '../../../utils/api';
 import {POST_JOB} from './api';
 
 export const postJob = async (input: JobInput) => {
+    console.log("lca", localStorage.getItem('auth_token'))
     const result = await graphqlRequest<{input: JobInput}, PostJobResponse>({
         mutation: POST_JOB,
         token: localStorage.getItem('auth_token'),
