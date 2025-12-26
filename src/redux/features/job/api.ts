@@ -17,8 +17,8 @@ export const POST_JOB = `
 `;
 
 export const GET_JOBS = `
- query GetJobs() {
-    getJobs() {
+ query GetJobs {
+    getJobs {
       title
    }
  }

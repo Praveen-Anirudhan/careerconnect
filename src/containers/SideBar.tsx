@@ -1,6 +1,8 @@
 import {useNavigate} from 'react-router-dom';
 import {removeAuthToken} from "../services/tokenService";
 import SideBar from "../components/SideBar";
+import {useDispatch} from "react-redux";
+import {getJobRequest} from "../redux/features/job/jobSlice.tsx";
 
 type Props = {
     activeView: 'dashboard' | 'applicants' | 'postjob' | 'myjobs';
@@ -10,7 +12,7 @@ type Props = {
 const SideBarContainer = ({ setActiveView}: Props) => {
 
     const navigate = useNavigate();
-
+    const dispatch = useDispatch();
     const handleLogout = () => {
         removeAuthToken();
         navigate('/');
@@ -22,6 +24,7 @@ const SideBarContainer = ({ setActiveView}: Props) => {
 
     const onMyJobsClick = () => {
         setActiveView("myjobs")
+        dispatch(getJobRequest());
     }
 
     const onApplicantsClick = () => {
