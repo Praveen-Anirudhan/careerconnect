@@ -1,8 +1,8 @@
 import { createContext, useState, type ReactNode } from 'react';
-import { setAuthToken, removeAuthToken } from '../services/tokenService';
+import { setAuthToken, removeAuthToken, isAuthenticated } from '../services/tokenService';
 
 interface AuthContextType {
-    isAuthenticated: boolean;
+    isUserAuthenticated: boolean | null;
     login: (token: string) => void;
     logout: () => void;
     signUp: (token: string) => void;
@@ -11,25 +11,26 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | null>(null);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+    const [isUserAuthenticated, setIsUserAuthenticated] = useState<boolean | null>(isAuthenticated());
 
     const signUp = (token: string) => {
         setAuthToken(token);
-        setIsAuthenticated(true);
+        setIsUserAuthenticated(true);
     };
 
     const login = (token: string) => {
         setAuthToken(token);
-        setIsAuthenticated(true);
+        setIsUserAuthenticated(true);
     };
 
     const logout = () => {
         removeAuthToken();
-        setIsAuthenticated(false);
+        setIsUserAuthenticated(false);
     };
 
     return (
-        <AuthContext.Provider value={{ isAuthenticated, login, logout, signUp }}>
+        <AuthContext.Provider value={{ isUserAuthenticated, login, logout, signUp }}>
             {children}
         </AuthContext.Provider>
     );
