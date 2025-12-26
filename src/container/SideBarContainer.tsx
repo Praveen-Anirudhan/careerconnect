@@ -1,11 +1,14 @@
-import {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {removeAuthToken} from "../services/tokenService";
 import SideBar from "../components/SideBar";
 
-const SideBarContainer = () => {
+type Props = {
+    activeView: 'dashboard' | 'applicants' | 'postjob' | 'myjobs';
+    setActiveView: (view: 'dashboard' | 'applicants' | 'postjob' | 'myjobs') => void;
+};
 
-    const [activeView, setActiveView] = useState('dashboard')
+const SideBarContainer = ({ setActiveView}: Props) => {
+
     const navigate = useNavigate();
 
     const handleLogout = () => {
@@ -14,18 +17,28 @@ const SideBarContainer = () => {
     }
 
     const handleDashboardClick = () => {
-        setActiveView('dashboard');
+        setActiveView("dashboard")
     }
 
-    const
+    const onMyJobsClick = () => {
+        setActiveView("myjobs")
+    }
+
+    const onApplicantsClick = () => {
+        setActiveView("applicants")
+    }
+
+    const onPostJobClick = () => {
+        setActiveView("postjob")
+    }
 
     return (
         <SideBar
             onLogout={handleLogout}
-            onDashboardClick={() => handleDashboardClick}
-            onMyJobsClick={() => navigate('/my-jobs')}
-            onApplicantsClick={() => navigate('/applicants')}
-            onPostJobClick={() => navigate('/post-job')}
+            onDashboardClick={handleDashboardClick}
+            onMyJobsClick={onMyJobsClick}
+            onApplicantsClick={onApplicantsClick}
+            onPostJobClick={onPostJobClick}
         />
     )
 }
