@@ -46,8 +46,6 @@ const authSlice = createSlice({
             state.error = action.payload;
         },
     },
-
-
 });
 
 export const { loginRequest, loginSuccess, loginFailure, signUpRequest, signUpSuccess, signUpFailure } = authSlice.actions;
