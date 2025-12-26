@@ -1,5 +1,7 @@
 import {type ReactNode} from "react";
 import {Briefcase, CirclePlus, File, LogOut, Users} from "lucide-react";
+import {getJobs} from "../redux/features/job/selector.ts";
+import {useSelector} from "react-redux";
 
 interface SideBarProps{
     onApplicantsClick? : () => void;
@@ -15,6 +17,8 @@ interface MenuItem{
 }
 
 const SideBar = ({ onApplicantsClick, onDashboardClick, onPostJobClick, onMyJobsClick, onLogout }: SideBarProps) => {
+    const jobs = useSelector(getJobs);
+    console.log(jobs);
     const menuItems = [
         { icon: <Briefcase size={24} />, label: "Dashboard" },
         { icon: <File size={24} />, label: "My Jobs" },

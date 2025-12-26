@@ -14,10 +14,10 @@ export function* postJobSaga(action: PayloadAction<JobInput>): Generator {
     }
 }
 
-export function *getJobSaga(): Generator {
+export function* getJobSaga(): Generator {
     try{
         const response = yield call(getJob);
-        yield put(getJobSuccess(response));
+        yield put(getJobSuccess(response?.data?.getJobs));
     } catch(error: unknown){
         const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred';
         yield put(getJobFailure(errorMessage));

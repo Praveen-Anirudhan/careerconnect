@@ -17,20 +17,25 @@ interface Job {
     created_at: string;
 }
 
+interface GetJob{
+    title: string;
+}
+
 interface JobState {
     jobs: Job | null;
     loading: boolean;
     error: string | null;
-    title: string | null;
+    getJob: GetJob[];
     getJobLoading: boolean;
     getJobError: string | null;
+
 }
 
 const initialState: JobState = {
     jobs: null,
     loading: false,
     error: null,
-    title: null,
+    getJob: [],
     getJobLoading: false,
     getJobError: null,
 };
@@ -59,7 +64,7 @@ const jobSlice = createSlice({
         },
         getJobSuccess: (state, action: PayloadAction<{title: string}>) => {
             state.getJobLoading = false;
-            state.title = action.payload.title;
+            state?.getJob.push(action.payload);
             state.getJobError = null;
         },
         getJobFailure: (state, action: PayloadAction<string>) => {

@@ -1,3 +1,3 @@
 import type { RootState } from "../../store";
 
-export const selectJob = (state: RootState) => state.job.jobs;
+export const getJobs = (state: RootState) => state.job.getJob;

@@ -27,5 +27,6 @@ export const getJob = async() => {
     if(result.errors){
         throw new Error(result.errors[0]?.message || "Job fetching failed");
     }
+    return result;
 }
 
