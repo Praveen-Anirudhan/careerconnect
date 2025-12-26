@@ -35,7 +35,7 @@ const SideBarContainer = ({ setActiveView}: Props) => {
     return (
         <SideBar
             onLogout={handleLogout}
-            onDashboardClick={() => handleDashboardClick}
+            onDashboardClick={handleDashboardClick}
             onMyJobsClick={onMyJobsClick}
             onApplicantsClick={onApplicantsClick}
             onPostJobClick={onPostJobClick}
