@@ -15,3 +15,11 @@ export const POST_JOB = `
     }
   }
 `;
+
+export const GET_JOBS = `
+ query GetJobs() {
+    getJobs() {
+      title
+   }
+ }
+`

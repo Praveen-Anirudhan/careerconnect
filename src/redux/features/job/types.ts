@@ -35,3 +35,8 @@ export type PostJobResponse = {
     created_at: string;
     errors?: Array<{ message: string }>;
 };
+
+export type GetJobResponse = {
+    title: string;
+    errors?: Array<{ message: string }>;
+}

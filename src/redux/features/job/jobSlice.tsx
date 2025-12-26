@@ -21,12 +21,18 @@ interface JobState {
     jobs: Job | null;
     loading: boolean;
     error: string | null;
+    title: string | null;
+    getJobLoading: boolean;
+    getJobError: string | null;
 }
 
 const initialState: JobState = {
     jobs: null,
     loading: false,
     error: null,
+    title: null,
+    getJobLoading: false,
+    getJobError: null,
 };
 
 const jobSlice = createSlice({
@@ -46,9 +52,22 @@ const jobSlice = createSlice({
         postJobFailure: (state, action: PayloadAction<string>) => {
             state.loading = false;
             state.error = action.payload;
-        }
+        },
+        getJobRequest:(state) => {
+            state.getJobLoading = true;
+            state.error = null;
+        },
+        getJobSuccess: (state, action: PayloadAction<{title: string}>) => {
+            state.getJobLoading = false;
+            state.title = action.payload.title;
+            state.getJobError = null;
+        },
+        getJobFailure: (state, action: PayloadAction<string>) => {
+            state.getJobLoading = false;
+            state.getJobError = action.payload;
+        },
     }
 });
 
-export const { postJobRequest, postJobSuccess, postJobFailure } = jobSlice.actions;
+export const { postJobRequest, postJobSuccess, postJobFailure, getJobRequest, getJobSuccess, getJobFailure } = jobSlice.actions;
 export default jobSlice.reducer;
