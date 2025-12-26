@@ -1,3 +1,9 @@
+/*
+ * Using export async function graphqlRequest<VariablesType, ResponseType>({
+ * VariablesType and ResponseType are generic types that allow you to specify the types of the variables and response data for the GraphQL request.
+ * Usual functions are not type-safe and can lead to runtime errors if the types of the variables or response data do not match the expected types.
+ *
+ */
 type GraphQLRequestArgs<VariablesType> = {
     query?: string;
     mutation?: string;
