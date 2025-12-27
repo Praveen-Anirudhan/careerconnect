@@ -42,7 +42,7 @@ export default function AppRouter() {
 }
 
 function ProtectedRoute(){
-    const { isAuthenticated } = useAuth();
-    return isAuthenticated ? <Outlet /> : <Navigate to="/" replace />;
+    const { isUserAuthenticated } = useAuth();
+    return isUserAuthenticated ? <Outlet /> : <Navigate to="/" replace />;
 }
 
