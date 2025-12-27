@@ -1,8 +1,8 @@
 import { useState } from "react";
 import JobCard from "../../components/JobCard";
 import { filteredJobs } from "../../utils/filterJobs";
-import type {Job} from "../../data/jobs";
-import jobs from "../../data/jobs";
+import type {Job} from "../../mockData/jobs";
+import jobs from "../../mockData/jobs";
 import {SearchBar} from "../../components/SearchBar";
 
 const JobsPage = () => {

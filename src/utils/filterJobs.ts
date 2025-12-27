@@ -1,4 +1,4 @@
-import jobs from "../data/jobs";
+import jobs from "../mockData/jobs";
 
 interface FilterParams{
     searchQuery: string;

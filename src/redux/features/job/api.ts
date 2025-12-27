@@ -19,7 +19,11 @@ export const POST_JOB = `
 export const GET_JOBS = `
  query GetJobs {
     getJobs {
+      id
       title
+      location
+      salary_range
+      job_type
    }
  }
 `

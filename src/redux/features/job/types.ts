@@ -38,5 +38,9 @@ export type PostJobResponse = {
 
 export type GetJobResponse = {
     title: string;
+    location: string;
+    salary_range: string;
+    job_type: JobType;
+    id: string;
     errors?: Array<{ message: string }>;
 }

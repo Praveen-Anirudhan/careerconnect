@@ -19,6 +19,10 @@ interface Job {
 
 interface GetJob{
     title: string;
+    location: string;
+    salary_range: string;
+    job_type: JobType;
+    id: string;
 }
 
 interface JobState {
@@ -62,9 +66,9 @@ const jobSlice = createSlice({
             state.getJobLoading = true;
             state.error = null;
         },
-        getJobSuccess: (state, action: PayloadAction<{title: string}>) => {
+        getJobSuccess: (state, action: PayloadAction<GetJob>) => {
             state.getJobLoading = false;
-            state?.getJob.push(action.payload);
+            state.getJob = [action.payload];
             state.getJobError = null;
         },
         getJobFailure: (state, action: PayloadAction<string>) => {
