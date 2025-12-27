@@ -39,6 +39,6 @@ export const resolvers = {
             user: safeUser(user as DBUser)
         };
     },
-    jobs: jobResolvers.Query.jobs,
-    createJob: jobResolvers.Mutation.createJob
+    getJobs: jobResolvers.getJobs,
+    createJob: jobResolvers.createJob
 };

@@ -5,9 +5,12 @@ import { JobInput } from "./types";
 import { AuthContext } from "./types";
 
 export const jobResolvers = {
-    Query: {
-       jobs: async(): Promise<Job[]> => {
+       getJobs : async(_args: unknown, context: AuthContext): Promise<Job[]> => {
            try{
+               if(!context.token){
+                   throw new Error("Unauthorized");
+               }
+
                const jobs = await sql`
                     SELECT * FROM jobs
                     ORDER BY created_at DESC;
@@ -17,9 +20,7 @@ export const jobResolvers = {
                console.error("Error fetching jobs:", error);
                throw new Error("Failed to fetch jobs");
            }
-       }
-    },
-    Mutation: {
+       },
         createJob: async (
             { input }: { input: JobInput },
             context: AuthContext
@@ -94,5 +95,4 @@ export const jobResolvers = {
                 throw new Error("Failed to create job");
             }
         }
-    }
 };
