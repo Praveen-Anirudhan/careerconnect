@@ -1,6 +1,4 @@
 import { MapPin, DollarSign, Clock } from "lucide-react";
-// Remove this line - you don't need to import jobs in JobCard
-// import job from '../data/jobs';
 
 interface Job {
   title: string;
