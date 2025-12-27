@@ -1,5 +1,4 @@
-// src/utils/user.ts
-import { sql } from "../db/index.ts";
+import { sql } from "../db";
 
 export type DBUser = {
     id: string;
