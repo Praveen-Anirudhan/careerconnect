@@ -3,12 +3,11 @@ import {
     loginRequest,
     loginSuccess,
     loginFailure,
-    logout,
     signUpRequest,
     signUpSuccess,
     signUpFailure
 } from './authSlice';
-import { loginUser, registerUser } from '../../../services/auth';
+import { loginUser, registerUser } from './auth';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import type {User} from './types'
 import {setAuthToken} from '../../../services/tokenService'
@@ -44,15 +43,6 @@ export function* handleSignUp(action: PayloadAction<{ email: string; password: s
     } catch (error: unknown) {
         const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred';
         yield put(signUpFailure(errorMessage));
-    }
-}
-
-export function* handleLogout() {
-    try {
-        yield put(logout());
-    } catch (error: unknown) {
-        const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred';
-        yield put(loginFailure(errorMessage));
     }
 }
 
