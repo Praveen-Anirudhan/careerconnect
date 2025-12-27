@@ -1,6 +1,6 @@
-import { graphqlRequest } from "../utils/api";
+import { graphqlRequest } from "../../../utils/api";
 import { LOGIN_MUTATION, REGISTER_MUTATION } from "./api";
-import type { RegisterInput, RegisterResponse, LoginInput, LoginResponse } from "../types/authTypes";
+import type { RegisterInput, RegisterResponse, LoginInput, LoginResponse } from "./types";
 
 export const registerUser = async ({email, password, role}: RegisterInput) => {
     const result = await graphqlRequest<RegisterInput, RegisterResponse>({

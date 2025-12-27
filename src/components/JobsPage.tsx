@@ -1,6 +1,6 @@
 import { useState } from "react";
 import JobCard from "./JobCard";
-import type {Job} from "../data/jobs";
+import type {Job} from "../mockData/jobs";
 import {filteredJobs} from "../utils/filterJobs.ts";
 import {SearchBar} from "./SearchBar";
 

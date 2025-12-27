@@ -28,7 +28,6 @@ export function generateToken(user: { id: string }) {
         {
             sub: user.id,
             at: Date.now() / 1000,
-            iss: "careerconnect",
         },
         secret,
         {

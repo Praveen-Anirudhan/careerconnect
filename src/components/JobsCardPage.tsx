@@ -1,5 +1,5 @@
 import JobCard from "./JobCard";
-import jobs from "../data/jobs";
+import jobs from "../mockData/jobs";
 
 const JobsPage = () => {
   return (
