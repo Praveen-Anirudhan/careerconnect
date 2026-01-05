@@ -3,9 +3,9 @@ name: React App CI
 # Run workflow on every push and pull request to main or dev branches
 on:
   push:
-    branches: [ main, dev ]
+    branches: [main, dev]
   pull_request:
-    branches: [ main, dev ]
+    branches: [main, dev]
 
 jobs:
   build-and-test:
@@ -25,7 +25,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-          cache: "npm"
+          cache: 'npm'
 
       # Step 3: Install dependencies
       - name: Install dependencies
@@ -37,9 +37,8 @@ jobs:
 
         # Step 5: Run unit tests
         # If you don’t have tests yet, comment this step for now
-#      - name: Run Tests
-#        run: npm test
-
+      #      - name: Run Tests
+      #        run: npm test
       # Step 6: Build the app
       - name: Build project
         run: npm run build

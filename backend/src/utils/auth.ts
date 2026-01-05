@@ -18,28 +18,27 @@ Call this function after successful user login/authentication
 The returned token should be sent to the client and included in subsequent API requests in the Authorization header
  */
 
-import jwt from "jsonwebtoken";
+import jwt from 'jsonwebtoken';
 
 export function generateToken(user: { id: string }) {
-    const secret = process.env.JWT_SECRET;
-    if (!secret) throw new Error("Missing JWT_SECRET environment variable");
+  const secret = process.env.JWT_SECRET;
+  if (!secret) throw new Error('Missing JWT_SECRET environment variable');
 
-    return jwt.sign(
-        {
-            sub: user.id,
-            at: Date.now() / 1000,
-        },
-        secret,
-        {
-            expiresIn: "1d",
-            issuer: "careerconnect",
-        }
-    );
+  return jwt.sign(
+    {
+      sub: user.id,
+      at: Date.now() / 1000,
+    },
+    secret,
+    {
+      expiresIn: '1d',
+      issuer: 'careerconnect',
+    }
+  );
 }
 
 export function verifyToken(token: string) {
-    const secret = process.env.JWT_SECRET;
-    if (!secret) throw new Error("Missing JWT_SECRET environment variable");
-    return jwt.verify(token, secret);
+  const secret = process.env.JWT_SECRET;
+  if (!secret) throw new Error('Missing JWT_SECRET environment variable');
+  return jwt.verify(token, secret);
 }
-

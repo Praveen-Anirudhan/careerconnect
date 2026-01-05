@@ -1,48 +1,49 @@
-import {Navigate, createBrowserRouter, RouterProvider, Outlet} from "react-router-dom";
-import Home from "../pages/Home/Home";
-import JobList from "../pages/Candidate/JobList";
-import JobDetails from "../pages/Candidate/JobDetails";
-import ApplyJob from "../pages/Candidate/ApplyJob";
-import MyApplications from "../pages/Candidate/MyApplications";
-import PostJob from "../pages/Recruiter/PostJob";
-import Applicants from "../pages/Recruiter/Applicants";
-import Login from "../pages/Recruiter/Login";
-import NotFound from "../pages/NotFound";
-import Dashboard from "../pages/Recruiter/Dashboard";
-import {useAuth} from "../hooks/useAuth.ts";
-import SignUp from "../pages/Recruiter/SignUp";
+import {
+  Navigate,
+  createBrowserRouter,
+  RouterProvider,
+  Outlet,
+} from 'react-router-dom';
+import Home from '../pages/Home/Home';
+import JobList from '../pages/Candidate/JobList';
+import JobDetails from '../pages/Candidate/JobDetails';
+import ApplyJob from '../pages/Candidate/ApplyJob';
+import MyApplications from '../pages/Candidate/MyApplications';
+import PostJob from '../pages/Recruiter/PostJob';
+import Applicants from '../pages/Recruiter/Applicants';
+import Login from '../pages/Recruiter/Login';
+import NotFound from '../pages/NotFound';
+import Dashboard from '../pages/Recruiter/Dashboard';
+import { useAuth } from '../hooks/useAuth.ts';
+import SignUp from '../pages/Recruiter/SignUp';
 
 export default function AppRouter() {
+  const router = createBrowserRouter([
+    {
+      errorElement: <NotFound />,
+      children: [
+        { path: '/', element: <Home /> },
+        { path: '/jobs', element: <JobList /> },
+        { path: '/jobs/:id', element: <JobDetails /> },
+        { path: '/apply/:id', element: <ApplyJob /> },
+        { path: '/applications', element: <MyApplications /> },
+        { path: '/recruiter/login', element: <Login /> },
+        { path: '/recruiter/signup', element: <SignUp /> },
+        { path: '/recruiter/post', element: <PostJob /> },
+        { path: '/recruiter/applicants/:jobId', element: <Applicants /> },
+        {
+          path: '/recruiter/dashboard',
+          element: <ProtectedRoute />,
+          children: [{ path: '/recruiter/dashboard', element: <Dashboard /> }],
+        },
+      ],
+    },
+  ]);
 
-    const router = createBrowserRouter([
-            {
-                errorElement: <NotFound />,
-                children: [
-                    { path: "/", element: <Home/> },
-                    { path: "/jobs", element : <JobList/> },
-                    { path: "/jobs/:id", element : <JobDetails/> },
-                    { path: "/apply/:id", element : <ApplyJob/> },
-                    { path: "/applications", element : <MyApplications/> },
-                    { path: "/recruiter/login", element: <Login/>},
-                    { path: "/recruiter/signup", element: <SignUp/>},
-                    { path: "/recruiter/post", element: <PostJob/>},
-                    { path: "/recruiter/applicants/:jobId", element: <Applicants/>},
-                    {
-                        path: "/recruiter/dashboard",
-                        element: <ProtectedRoute/>,
-                        children: [
-                            { path: "/recruiter/dashboard", element: <Dashboard/> },
-                        ]
-                    },
-                ],
-            }
-        ])
-
-    return <RouterProvider router={router} />
+  return <RouterProvider router={router} />;
 }
 
-function ProtectedRoute(){
-    const { isUserAuthenticated } = useAuth();
-    return isUserAuthenticated ? <Outlet /> : <Navigate to="/" replace />;
+function ProtectedRoute() {
+  const { isUserAuthenticated } = useAuth();
+  return isUserAuthenticated ? <Outlet /> : <Navigate to="/" replace />;
 }
-
