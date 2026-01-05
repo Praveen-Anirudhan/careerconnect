@@ -66,9 +66,9 @@ const jobSlice = createSlice({
             state.getJobLoading = true;
             state.error = null;
         },
-        getJobSuccess: (state, action: PayloadAction<GetJob>) => {
+        getJobSuccess: (state, action: PayloadAction<GetJob[]>) => {
             state.getJobLoading = false;
-            state.getJob = [action.payload];
+            state.getJob = action.payload;
             state.getJobError = null;
         },
         getJobFailure: (state, action: PayloadAction<string>) => {

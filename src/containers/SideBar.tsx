@@ -1,7 +1,7 @@
 import {useNavigate} from 'react-router-dom';
+import {useDispatch} from "react-redux";
 import {removeAuthToken} from "../services/tokenService";
 import SideBar from "../components/SideBar";
-import {useDispatch} from "react-redux";
 import {getJobRequest} from "../redux/features/job/jobSlice";
 
 type Props = {
