@@ -52,9 +52,11 @@ server.js
 ### Auth
 
 #### Register
+
 **POST** `/auth/register`
 
 **Body:**
+
 ```json
 {
   "name": "John",
@@ -64,9 +66,11 @@ server.js
 ```
 
 #### Login
+
 **POST** `/auth/login`
 
 **Body:**
+
 ```json
 {
   "email": "john@mail.com",
@@ -75,6 +79,7 @@ server.js
 ```
 
 **Returns:**
+
 ```json
 {
   "token": "jwt_token_here"
@@ -84,14 +89,17 @@ server.js
 ### Jobs
 
 #### Create a job (Protected)
+
 **POST** `/jobs`
 
 **Headers:**
+
 ```
 Authorization: Bearer <token>
 ```
 
 **Body:**
+
 ```json
 {
   "title": "Frontend Developer",
@@ -102,28 +110,35 @@ Authorization: Bearer <token>
 ```
 
 #### Get all jobs (Public)
+
 **GET** `/jobs`
 
 #### Get jobs created by the logged-in recruiter
+
 **GET** `/jobs/my`
 
 **Headers:**
+
 ```
 Authorization: Bearer <token>
 ```
 
 #### Update job (Protected)
+
 **PUT** `/jobs/:id`
 
 **Headers:**
+
 ```
 Authorization: Bearer <token>
 ```
 
 #### Delete job (Protected)
+
 **DELETE** `/jobs/:id`
 
 **Headers:**
+
 ```
 Authorization: Bearer <token>
 ```
@@ -141,16 +156,19 @@ JWT_SECRET=your_secret_key
 ## ▶️ Running the Project
 
 **Install dependencies:**
+
 ```bash
 npm install
 ```
 
 **Run in development:**
+
 ```bash
 npm run dev
 ```
 
 **Server runs on:**
+
 ```
 http://localhost:5000
 ```
