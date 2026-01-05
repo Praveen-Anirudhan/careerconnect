@@ -1,4 +1,5 @@
 import {useState} from 'react';
+import clsx from 'clsx';
 import { useDispatch } from 'react-redux';
 import {SelectInput, TextInput, TextArea} from './JobDetails.tsx'
 import {
@@ -45,6 +46,19 @@ export const JobDetailsForm = () => {
     const handleChange = (name: string, value: string) => {
         setForm({...form, [name]: value})
     }
+
+
+    const isFormValid = () => {
+        return (
+            form.title.trim() !== '' &&
+            form.company.trim() !== '' &&
+            form.location !== '' &&
+            form.salary_range.trim() !== '' &&
+            form.job_description.trim() !== '' &&
+            form.requirements.trim() !== '' &&
+            form.responsibilities.trim() !== ''
+        );
+    };
 
     return (
         <div className="flex flex-col gap-6">
@@ -113,12 +127,17 @@ export const JobDetailsForm = () => {
                 </div>
 
                 <div className="flex flex-row gap-4">
-                    <button className="bg-gray-400 text-white py-3 rounded-lg hover:bg-gray-500 transition w-1/3">{cancelButton}</button>
                     <button
+                        className="bg-gray-400 text-white py-3 rounded-lg hover:bg-gray-500 transition w-1/3">{cancelButton}</button>
+                    <button
+                        disabled={!isFormValid()}
                         onClick={() => {
-                            dispatch(postJobRequest(form))}
-                    }
-                        className="bg-cyan-600 text-white py-3 rounded-lg hover:bg-cyan-700 transition w-full">{submitButton}</button>
+                            dispatch(postJobRequest(form))
+                        }}
+                        className={clsx("py-3 rounded-lg transition w-full",
+                            isFormValid() ? 'bg-cyan-600 hover:bg-cyan-700 text-white'
+                                : 'bg-gray-400 text-white cursor-not-allowed'
+                        )}>{submitButton}</button>
                 </div>
             </div>
         </div>
