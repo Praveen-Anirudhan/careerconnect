@@ -44,37 +44,37 @@ const initialState: JobState = {
 };
 
 const jobSlice = createSlice({
-  name: 'job',
-  initialState,
-  reducers: {
-    postJobRequest: (state, action: PayloadAction<JobInput>) => {
-      state.loading = true;
-      state.error = null;
-      state.jobs = action.payload;
-    },
-    postJobSuccess: (state, action: PayloadAction<Job>) => {
-      state.loading = false;
-      state.jobs = action.payload;
-      state.error = null;
-    },
-    postJobFailure: (state, action: PayloadAction<string>) => {
-      state.loading = false;
-      state.error = action.payload;
-    },
-    getJobRequest: (state) => {
-      state.getJobLoading = true;
-      state.error = null;
-    },
-    getJobSuccess: (state, action: PayloadAction<GetJob>) => {
-      state.getJobLoading = false;
-      state.getJob = [action.payload];
-      state.getJobError = null;
-    },
-    getJobFailure: (state, action: PayloadAction<string>) => {
-      state.getJobLoading = false;
-      state.getJobError = action.payload;
-    },
-  },
+    name: 'job',
+    initialState,
+    reducers: {
+        postJobRequest: (state, action: PayloadAction<JobInput>) => {
+            state.loading = true;
+            state.error = null;
+            state.jobs = action.payload;
+        },
+        postJobSuccess: (state, action: PayloadAction<Job>) => {
+            state.loading = false;
+            state.jobs = action.payload;
+            state.error = null;
+        },
+        postJobFailure: (state, action: PayloadAction<string>) => {
+            state.loading = false;
+            state.error = action.payload;
+        },
+        getJobRequest:(state) => {
+            state.getJobLoading = true;
+            state.error = null;
+        },
+        getJobSuccess: (state, action: PayloadAction<GetJob[]>) => {
+            state.getJobLoading = false;
+            state.getJob = action.payload;
+            state.getJobError = null;
+        },
+        getJobFailure: (state, action: PayloadAction<string>) => {
+            state.getJobLoading = false;
+            state.getJobError = action.payload;
+        },
+    }
 });
 
 export const {
