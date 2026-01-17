@@ -1,19 +1,20 @@
 import {useSelector} from 'react-redux';
-import {getJobs} from '../redux/features/job/selector';
+import {jobsSelector} from '../redux/features/job/selector';
+import LoadingPage from './LoadingPage';
 
 interface RecruiterJobsProps{
     showMyJobs: boolean;
 }
 
 const RecruiterJobs = ({showMyJobs}: RecruiterJobsProps) => {
-    const jobs = useSelector(getJobs);
+    const {getJob, getJobLoading} = useSelector(jobsSelector);
 
-    if(!jobs) return <div>Loading...</div>;
+    if(getJobLoading) return <LoadingPage/>;
 
     return (
-        showMyJobs && jobs &&
+        showMyJobs && getJob &&
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {jobs.flat().map((job) => (
+            {getJob.map((job) => (
                 <div key={job?.id} className="bg-white p-4 rounded-lg shadow-md border border-gray-200">
                     <h2 className="text-lg font-semibold text-gray-800">
                         {job?.title}
