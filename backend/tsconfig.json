@@ -13,7 +13,7 @@
     "allowImportingTsExtensions": true,
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
-    "noEmit": true
+    "noEmit": false
   },
   "ts-node": {
     "esm": true,
