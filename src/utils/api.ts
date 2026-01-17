@@ -21,7 +21,7 @@ export async function graphqlRequest<VariablesType, ResponseType>({
         query: query || mutation,
         variables
     }
-    const response = await fetch('https://careerconnect-21bk.onrender.com/graphql', {
+    const response = await fetch('https://becareerconnect.vercel.app/graphql', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
