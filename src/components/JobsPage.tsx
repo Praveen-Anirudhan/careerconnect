@@ -1,29 +1,28 @@
-import { useState } from "react";
-import JobCard from "./JobCard";
-import type {Job} from "../mockData/jobs";
-import {filteredJobs} from "../utils/filterJobs.ts";
-import {SearchBar} from "./SearchBar";
+import { useState } from 'react';
+import JobCard from './JobCard';
+import type { Job } from '../mockData/jobs';
+import { filteredJobs } from '../utils/filterJobs.ts';
+import { SearchBar } from './SearchBar';
 
 const JobsPage = () => {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [locationQuery, setLocationQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState('');
+  const [locationQuery, setLocationQuery] = useState('');
   const [selectedJobType, setSelectedJobType] = useState<string[]>([]);
   const [selectedLocation, setSelectedLocation] = useState<string[]>([]);
 
-
   const handleJobTypeChange = (type: string) => {
-    setSelectedJobType(prev =>
-        prev.includes(type)
-            ? prev.filter(item => item !== type)
-            : [...prev, type]
+    setSelectedJobType((prev) =>
+      prev.includes(type)
+        ? prev.filter((item) => item !== type)
+        : [...prev, type]
     );
   };
 
   const handleLocationChange = (location: string) => {
-    setSelectedLocation(prev =>
-        prev.includes(location)
-            ? prev.filter(item => item !== location)
-            : [...prev, location]
+    setSelectedLocation((prev) =>
+      prev.includes(location)
+        ? prev.filter((item) => item !== location)
+        : [...prev, location]
     );
   };
 
@@ -36,10 +35,10 @@ const JobsPage = () => {
 
         {/* Search Bar */}
         <SearchBar
-            searchQuery={searchQuery}
-            setSearchQuery={setSearchQuery}
-            locationQuery={locationQuery}
-            setLocationQuery={setLocationQuery}
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+          locationQuery={locationQuery}
+          setLocationQuery={setLocationQuery}
         />
 
         <div className="flex gap-8">
@@ -49,7 +48,7 @@ const JobsPage = () => {
               <div className="mb-6">
                 <h3 className="font-semibold text-gray-900 mb-4">Job Type</h3>
                 <div className="space-y-2">
-                  {["Full-time", "Part-time", "Contract", "Internship"].map(
+                  {['Full-time', 'Part-time', 'Contract', 'Internship'].map(
                     (type) => (
                       <label
                         key={type}
@@ -72,11 +71,11 @@ const JobsPage = () => {
                 <h3 className="font-semibold text-gray-900 mb-4">Location</h3>
                 <div className="space-y-2">
                   {[
-                    "Remote",
-                    "San Francisco, CA",
-                    "New York, NY",
-                    "Austin, TX",
-                    "Seattle, WA",
+                    'Remote',
+                    'San Francisco, CA',
+                    'New York, NY',
+                    'Austin, TX',
+                    'Seattle, WA',
                   ].map((location) => (
                     <label
                       key={location}
@@ -102,7 +101,12 @@ const JobsPage = () => {
               Showing {filteredJobs.length} jobs
             </p>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              {filteredJobs({searchQuery, locationQuery, selectedJobType, selectedLocation}).map((job:Job, index:number) => (
+              {filteredJobs({
+                searchQuery,
+                locationQuery,
+                selectedJobType,
+                selectedLocation,
+              }).map((job: Job, index: number) => (
                 <JobCard key={index} job={job} />
               ))}
             </div>
