@@ -58,6 +58,22 @@ export const JobDetailsForm = () => {
     );
   };
 
+  const resetForm = () => {
+    setForm({
+      title: '',
+      company: '',
+      location: '',
+      job_type: JobType.FULL_TIME,
+      salary_range: '',
+      job_description: '',
+      requirements: '',
+      responsibilities: '',
+      skills: '',
+      posted_by: '',
+      created_at: '',
+    });
+  }
+
   return (
     <div className="flex flex-col gap-6">
       <div className="flex flex-col gap-3">
@@ -133,6 +149,7 @@ export const JobDetailsForm = () => {
             disabled={!isFormValid()}
             onClick={() => {
               dispatch(postJobRequest(form));
+              resetForm();
             }}
             className={clsx(
               'py-3 rounded-lg transition w-full',
