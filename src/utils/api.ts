@@ -31,7 +31,14 @@ export async function graphqlRequest<VariablesType, ResponseType>({
       },
       body: JSON.stringify(body),
     }
-  );
+    const response = await fetch('https://becareerconnect.vercel.app/graphql', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(body),
+    });
 
   return response.json() as Promise<ResponseType>;
 }

@@ -1,10 +1,10 @@
-import express from 'express';
-import cors from 'cors';
-import dotenv from 'dotenv';
-import { graphqlHTTP } from 'express-graphql';
-import { schema } from './graphql/schema.ts';
-import { resolvers } from './graphql/resolvers.ts';
-import jwt from 'jsonwebtoken';
+import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+import { graphqlHTTP } from "express-graphql";
+import { schema } from "./graphql/schema";
+import { resolvers } from "./graphql/resolvers";
+import jwt from "jsonwebtoken";
 import { JwtPayload } from 'jsonwebtoken';
 
 dotenv.config();
