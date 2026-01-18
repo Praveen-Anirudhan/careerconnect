@@ -3,7 +3,6 @@
 <!-- HEADER STYLE: MODERN -->
 <div align="left" style="position: relative; width: 100%; height: 100%; ">
 
-
 # <code>❯ CareerConnect</code>
 
 <em><em>
@@ -38,12 +37,12 @@
 2. [Overview](#overview)
 3. [Features](#features)
 4. [Project Structure](#project-structure)
-    4.1. [Project Index](#project-index)
+   4.1. [Project Index](#project-index)
 5. [Getting Started](#getting-started)
-    5.1. [Prerequisites](#prerequisites)
-    5.2. [Installation](#installation)
-    5.3. [Usage](#usage)
-    5.4. [Testing](#testing)
+   5.1. [Prerequisites](#prerequisites)
+   5.2. [Installation](#installation)
+   5.3. [Usage](#usage)
+   5.4. [Testing](#testing)
 6. [Roadmap](#roadmap)
 7. [Contributing](#contributing)
 8. [License](#license)
@@ -52,8 +51,6 @@
 ---
 
 ## Overview
-
-
 
 ---
 
@@ -438,48 +435,51 @@ This project requires the following dependencies:
 
 ### Installation
 
-Build  from the source and intsall dependencies:
+Build from the source and intsall dependencies:
 
 1. **Clone the repository:**
 
-    ```sh
-    ❯ git clone ../
-    ```
+   ```sh
+   ❯ git clone ../
+   ```
 
 2. **Navigate to the project directory:**
 
-    ```sh
-    ❯ cd 
-    ```
+   ```sh
+   ❯ cd
+   ```
 
 3. **Install the dependencies:**
 
 <!-- SHIELDS BADGE CURRENTLY DISABLED -->
-	<!-- [![npm][npm-shield]][npm-link] -->
-	<!-- REFERENCE LINKS -->
-	<!-- [npm-shield]: https://img.shields.io/badge/npm-CB3837.svg?style={badge_style}&logo=npm&logoColor=white -->
-	<!-- [npm-link]: https://www.npmjs.com/ -->
 
-	**Using [npm](https://www.npmjs.com/):**
+    <!-- [![npm][npm-shield]][npm-link] -->
+    <!-- REFERENCE LINKS -->
+    <!-- [npm-shield]: https://img.shields.io/badge/npm-CB3837.svg?style={badge_style}&logo=npm&logoColor=white -->
+    <!-- [npm-link]: https://www.npmjs.com/ -->
 
-	```sh
-	❯ npm install
-	```
+    **Using [npm](https://www.npmjs.com/):**
+
+    ```sh
+    ❯ npm install
+    ```
 
 ### Usage
 
 Run the project with:
 
 **Using [npm](https://www.npmjs.com/):**
+
 ```sh
 npm start
 ```
 
 ### Testing
 
- uses the {__test_framework__} test framework. Run the test suite with:
+uses the {**test_framework**} test framework. Run the test suite with:
 
 **Using [npm](https://www.npmjs.com/):**
+
 ```sh
 npm test
 ```
@@ -488,7 +488,7 @@ npm test
 
 ## Roadmap
 
-- [X] **`Task 1`**: <strike>Implement feature one.</strike>
+- [x] **`Task 1`**: <strike>Implement feature one.</strike>
 - [ ] **`Task 2`**: Implement feature two.
 - [ ] **`Task 3`**: Implement feature three.
 
@@ -539,7 +539,7 @@ npm test
 
 ## License
 
- is protected under the [LICENSE](https://choosealicense.com/licenses) License. For more details, refer to the [LICENSE](https://choosealicense.com/licenses/) file.
+is protected under the [LICENSE](https://choosealicense.com/licenses) License. For more details, refer to the [LICENSE](https://choosealicense.com/licenses/) file.
 
 ---
 
@@ -553,8 +553,6 @@ npm test
 
 </div>
 
-
 [back-to-top]: https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square
-
 
 ---
