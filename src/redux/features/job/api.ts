@@ -26,4 +26,4 @@ export const GET_JOBS = `
       job_type
    }
  }
-`
+`;

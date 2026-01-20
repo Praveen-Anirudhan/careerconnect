@@ -1,50 +1,50 @@
 export interface User {
-    id: string;
-    token: string;
-    role?: string;
+  id: string;
+  token: string;
+  role?: string;
 }
 
 export interface AuthState {
-    user: User | null;
-    loading: boolean;
-    error: string | null;
-    email: string | null;
-    password: string | null;
-    role: string | null;
+  user: User | null;
+  loading: boolean;
+  error: string | null;
+  email: string | null;
+  password: string | null;
+  role: string | null;
 }
 
 export type RegisterInput = {
-    email: string;
-    password: string;
-    role: string;
+  email: string;
+  password: string;
+  role: string;
 };
 
 export type RegisterResponse = {
-    data?: {
-        register: {
-            token: string;
-            user: {
-                id: string;
-                role: string;
-            };
-        };
+  data?: {
+    register: {
+      token: string;
+      user: {
+        id: string;
+        role: string;
+      };
     };
-    errors?: Array<{ message: string }>;
+  };
+  errors?: Array<{ message: string }>;
 };
 
 export type LoginInput = {
-    email: string;
-    password: string;
+  email: string;
+  password: string;
 };
 
 export type LoginResponse = {
-    data?: {
-        login: {
-            token: string;
-            user: {
-                id: string;
-            };
-        };
+  data?: {
+    login: {
+      token: string;
+      user: {
+        id: string;
+      };
     };
-    errors?: Array<{ message: string }>;
+  };
+  errors?: Array<{ message: string }>;
 };

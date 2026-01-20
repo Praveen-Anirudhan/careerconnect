@@ -1,4 +1,4 @@
-import { MapPin, DollarSign, Clock } from "lucide-react";
+import { MapPin, DollarSign, Clock } from 'lucide-react';
 
 interface Job {
   title: string;

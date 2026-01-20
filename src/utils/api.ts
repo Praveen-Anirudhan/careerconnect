@@ -5,23 +5,23 @@
  *
  */
 type GraphQLRequestArgs<VariablesType> = {
-    query?: string;
-    mutation?: string;
-    variables?: VariablesType;
-    token?: string | null;
+  query?: string;
+  mutation?: string;
+  variables?: VariablesType;
+  token?: string | null;
 };
 
 export async function graphqlRequest<VariablesType, ResponseType>({
- mutation,
- query,
- variables,
- token
-}: GraphQLRequestArgs<VariablesType>){
-    const body = {
-        query: query || mutation,
-        variables
-    }
-    const response = await fetch('https://careerconnect-21bk.onrender.com/graphql', {
+  mutation,
+  query,
+  variables,
+  token,
+}: GraphQLRequestArgs<VariablesType>) {
+  const body = {
+    query: query || mutation,
+    variables,
+  };
+    const response = await fetch('https://becareerconnect.vercel.app/graphql', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -30,5 +30,5 @@ export async function graphqlRequest<VariablesType, ResponseType>({
         body: JSON.stringify(body),
     });
 
-    return response.json() as Promise<ResponseType>;
+  return response.json() as Promise<ResponseType>;
 }

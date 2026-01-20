@@ -91,7 +91,7 @@ const Footer = () => {
         {/* Copyright */}
         <div className="mt-12 pt-8 border-t border-gray-200 text-center">
           <p className="text-gray-600 text-sm">
-            © 2025 CareerConnect. All rights reserved.
+            © {new Date().getFullYear()} CareerConnect. All rights reserved.
           </p>
         </div>
       </div>
