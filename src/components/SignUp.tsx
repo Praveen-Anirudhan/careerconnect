@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useAuth } from '../hooks/useAuth.ts';
 import { isAuthenticated } from '../services/tokenService.ts';
 import { selectLoading, selectUser } from '../redux/features/auth/selector.ts';
+import PasswordInput from './PasswordInput.tsx';
 
 const SignUp = () => {
   const [email, setEmail] = useState<string>('');
@@ -71,16 +72,7 @@ const SignUp = () => {
             <label htmlFor="password" className="mb-1 font-medium">
               Password
             </label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              placeholder="********"
-              className="border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-500"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
+            <PasswordInput password={password} setPassword={setPassword} />
           </div>
 
           <button
