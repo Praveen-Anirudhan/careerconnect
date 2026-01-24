@@ -2,6 +2,7 @@ import { sql } from '../db';
 import { Job } from './types';
 import { verifyToken } from '../utils/auth';
 import { JobInput } from './types';
+import { JwtPayload } from 'jsonwebtoken';
 import { AuthContext } from './types';
 
 export const jobResolvers = {
@@ -11,10 +12,18 @@ export const jobResolvers = {
         throw new Error('Unauthorized');
       }
 
+      const user = verifyToken(context.token) as JwtPayload;
+      if (!user) {
+        throw new Error('Unauthorized');
+      }
+
       const jobs = await sql`
-                    SELECT * FROM jobs
-                    ORDER BY created_at DESC;
-                `;
+        SELECT * 
+        FROM jobs
+        WHERE posted_by = ${user.id}
+        ORDER BY created_at DESC;
+      `;
+
       return jobs as Job[];
     } catch (error) {
       console.error('Error fetching jobs:', error);
