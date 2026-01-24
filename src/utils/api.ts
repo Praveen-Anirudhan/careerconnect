@@ -21,7 +21,13 @@ export async function graphqlRequest<VariablesType, ResponseType>({
     query: query || mutation,
     variables,
   };
-    const response = await fetch('https://becareerconnect.vercel.app/graphql', {
+
+  const graphqlEndpoint = import.meta.env.VITE_GRAPHQL_ENDPOINT;
+  if (!graphqlEndpoint) {
+    throw new Error('GRAPHQL_ENDPOINT is not defined in environment variables');
+  }
+
+    const response = await fetch(graphqlEndpoint, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

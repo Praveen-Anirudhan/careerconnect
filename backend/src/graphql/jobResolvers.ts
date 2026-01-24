@@ -13,6 +13,7 @@ export const jobResolvers = {
       }
 
       const user = verifyToken(context.token) as JwtPayload;
+      const userId = user.sub as string;
       if (!user) {
         throw new Error('Unauthorized');
       }
@@ -20,7 +21,7 @@ export const jobResolvers = {
       const jobs = await sql`
         SELECT * 
         FROM jobs
-        WHERE posted_by = ${user.id}
+        WHERE posted_by = ${userId}
         ORDER BY created_at DESC;
       `;
 
@@ -34,8 +35,10 @@ export const jobResolvers = {
     { input }: { input: JobInput },
     context: AuthContext
   ): Promise<Job> => {
-    const user = verifyToken(context.token);
-    if (!user) {
+    const user = verifyToken(context.token) as JwtPayload;
+    const userId = user.sub as string;
+
+    if (!userId) {
       throw new Error('Unauthorized');
     }
 
@@ -49,7 +52,6 @@ export const jobResolvers = {
       requirements,
       skills,
       responsibilities,
-      posted_by,
       created_at,
     } = input;
 
@@ -78,26 +80,12 @@ export const jobResolvers = {
                                ${requirements},
                                ${responsibilities},
                                ${skills},
-                               ${posted_by},
+                               ${userId},
                                ${created_at}
                            )
                         RETURNING *;
                 `;
-
-      return {
-        id: newJob.id,
-        title: newJob.title,
-        job_description: newJob.job_description,
-        company: newJob.company,
-        location: newJob.location,
-        salary_range: newJob.salary_range,
-        job_type: newJob.job_type,
-        requirements: newJob.requirements,
-        responsibilities: newJob.responsibilities,
-        skills: newJob.skills,
-        posted_by: newJob.posted_by,
-        created_at: newJob.created_at,
-      };
+      return newJob as Job;
     } catch (error) {
       console.error('Error creating job:', error);
       throw new Error('Failed to create job');
