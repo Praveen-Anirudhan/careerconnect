@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import { isAuthenticated } from '../services/tokenService';
 import { useAuth } from '../hooks/useAuth.ts';
 import { Link } from 'react-router-dom';
+import PasswordInput from './PasswordInput.tsx';
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
@@ -75,15 +76,9 @@ const LoginForm = () => {
             <label htmlFor="password" className="mb-1 font-medium">
               Password
             </label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              placeholder="********"
-              className="border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-500"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
+            <PasswordInput
+              password={password}
+              setPassword={setPassword}
             />
           </div>
 
