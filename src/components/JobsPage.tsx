@@ -43,7 +43,7 @@ const JobsPage = () => {
 
         <div className="flex gap-8">
           {/* Filters Sidebar */}
-          <div className="w-64 flex-shrink-0">
+          <div className="w-64 shrink-0">
             <div className="bg-white rounded-lg p-6 sticky top-24">
               <div className="mb-6">
                 <h3 className="font-semibold text-gray-900 mb-4">Job Type</h3>
