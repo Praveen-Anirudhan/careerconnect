@@ -110,7 +110,7 @@ const LoginForm = ({role}: LoginFormProps) => {
             Forgot password?
           </p>
           <Link
-            to="/recruiter/signup"
+            to={`/${role}/signup`}
             className="flex flex-row gap-2 justify-center items-center"
           >
             <MoveLeft className="text-cyan-600" />
