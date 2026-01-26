@@ -41,7 +41,10 @@ const NavBar = () => {
             <User className="h-4 w-4 mr-2" />
             Recruiter Login
           </button>
-          <button className="inline-flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium bg-cyan-500 text-white text-gray-600 rounded-md hover:bg-cyan-600 transition-colors">
+          <button 
+            className="inline-flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium bg-cyan-500 text-white text-gray-600 rounded-md hover:bg-cyan-600 transition-colors"
+            onClick={() => navigate('/candidate/login')}
+          >
             <User className="h-4 w-4 mr-2" />
             Sign In
           </button>
