@@ -1,5 +1,6 @@
 const TOKEN_KEY = 'auth_token';
 const AUTH_FLAG = 'isAuthenticated';
+const USER_ROLE = 'user_role';
 
 export const setAuthToken = (token: string) => {
   localStorage.setItem(TOKEN_KEY, token);
@@ -13,6 +14,7 @@ export const getToken = () => {
 export const removeAuthToken = () => {
   localStorage.removeItem(TOKEN_KEY);
   localStorage.removeItem(AUTH_FLAG);
+  localStorage.removeItem(USER_ROLE);
 };
 
 export const isAuthenticated = () => {
@@ -20,4 +22,16 @@ export const isAuthenticated = () => {
     localStorage.getItem(AUTH_FLAG) === 'true' &&
     !!localStorage.getItem(TOKEN_KEY)
   );
+};
+
+export const setUserRole = (role: string) => {
+  localStorage.setItem(USER_ROLE, role);
+};
+
+export const getUserRole = () => {
+  return localStorage.getItem(USER_ROLE);
+};
+
+export const removeUserRole = () => {
+  localStorage.removeItem(USER_ROLE);
 };

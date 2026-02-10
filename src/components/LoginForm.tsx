@@ -10,6 +10,7 @@ import { isAuthenticated } from '../services/tokenService';
 import { useAuth } from '../hooks/useAuth.ts';
 import { Link } from 'react-router-dom';
 import PasswordInput from './PasswordInput.tsx';
+import { setUserRole } from '../services/tokenService';
 
 interface LoginFormProps {
   role: string;
@@ -40,6 +41,7 @@ const LoginForm = ({role}: LoginFormProps) => {
     if (isAuthenticated() && user?.token) {
       login(user?.token);
       navigate('/recruiter/dashboard');
+      setUserRole(role);
     }
   }, [user, navigate]);
 

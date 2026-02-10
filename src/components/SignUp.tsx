@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useAuth } from '../hooks/useAuth.ts';
 import { isAuthenticated } from '../services/tokenService.ts';
 import { selectLoading, selectUser } from '../redux/features/auth/selector.ts';
+import { setUserRole } from '../services/tokenService';
 import PasswordInput from './PasswordInput.tsx';
 
 interface SignUpProps {
@@ -36,8 +37,9 @@ const SignUp = ({role}: SignUpProps) => {
     if (isAuthenticated() && user?.token) {
       signUp(user?.token);
       navigate('/recruiter/dashboard');
+      setUserRole(role);
     }
-  }, [user, navigate]);
+  }, [user, navigate, role]);
 
   return (
     <div className="flex flex-col justify-center items-center sm:min-h-screen overflow-y-auto">
