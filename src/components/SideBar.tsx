@@ -1,4 +1,4 @@
-import { type ReactNode } from 'react';
+import { type ReactNode, useState } from 'react';
 import { Briefcase, CirclePlus, File, LogOut, Users } from 'lucide-react';
 
 interface SideBarProps {
@@ -21,6 +21,8 @@ const SideBar = ({
   onMyJobsClick,
   onLogout,
 }: SideBarProps) => {
+  const [isSelected, setIsSelected] = useState('Dashboard');
+
   const menuItems = [
     { icon: <Briefcase size={24} />, label: 'Dashboard' },
     { icon: <File size={24} />, label: 'My Jobs' },
@@ -28,6 +30,7 @@ const SideBar = ({
   ];
 
   const onClick = ({ label }: MenuItem) => {
+    setIsSelected(label);
     if (label === 'Dashboard') {
       onDashboardClick?.();
     } else if (label === 'Applicants') {
@@ -49,7 +52,7 @@ const SideBar = ({
           <div
             key={index}
             onClick={() => onClick(item)}
-            className="flex flex-row items-center gap-6 px-4 hover:bg-gray-100 rounded-lg py-2"
+            className={`flex flex-row items-center gap-6 px-4 rounded-lg py-2 active:bg-cyan-600 ${isSelected === item.label ? 'bg-cyan-200': ''}`}
           >
             {item.icon}
             <p>{item.label}</p>
