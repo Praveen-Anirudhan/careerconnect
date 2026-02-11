@@ -16,6 +16,7 @@ import NotFound from '../pages/NotFound';
 import Dashboard from '../pages/Recruiter/Dashboard';
 import { useAuth } from '../hooks/useAuth.ts';
 import SignUp from '../pages/Recruiter/SignUp';
+import CandidateDashboard from '../pages/Candidate/CandidateDashboard';
 
 export default function AppRouter() {
   const router = createBrowserRouter([
@@ -37,6 +38,11 @@ export default function AppRouter() {
           path: '/recruiter/dashboard',
           element: <ProtectedRoute />,
           children: [{ path: '/recruiter/dashboard', element: <Dashboard /> }],
+        },
+        {
+          path: '/candidate/dashboard',
+          element: <ProtectedRoute />,
+          children: [{ path: '/candidate/dashboard', element: <CandidateDashboard /> }],
         },
       ],
     },
