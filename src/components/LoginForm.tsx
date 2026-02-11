@@ -40,7 +40,8 @@ const LoginForm = ({role}: LoginFormProps) => {
   useEffect(() => {
     if (isAuthenticated() && user?.token) {
       login(user?.token);
-      navigate('/recruiter/dashboard');
+      const dashboardPath = role === 'recruiter' ? '/recruiter/dashboard' : '/candidate/dashboard';
+      navigate(dashboardPath)
       setUserRole(role);
     }
   }, [user, navigate]);
