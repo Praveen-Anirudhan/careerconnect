@@ -2,18 +2,11 @@ import {useContext} from 'react';
 import AuthContext  from '../context/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
 import { Briefcase, User } from 'lucide-react';
-import { getJob } from '../redux/features/job/job';
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getJobRequest } from '../redux/features/job/jobSlice.ts';
-import { jobsSelector } from '../redux/features/job/selector.ts';
 
 
 const NavBar = () => {
   const navigate = useNavigate();
   const { isUserAuthenticated } = useContext(AuthContext) ?? {isUserAuthenticated : null};
-  const [jobs, setJobs] = useState(null);
-  const dispatch = useDispatch();
 
   const handleJobsClick = () => {
     if(!isUserAuthenticated){
@@ -23,13 +16,6 @@ const NavBar = () => {
       navigate('/jobs');
     }
   }
-
-  useEffect(() => {
-    console.log('Testing dispatch on mount...');
-    dispatch(getJobRequest());
-  }, [dispatch]);
-
-  const jobs = useSelector(jobsSelector);
 
   return (
     <nav className="sticky top-0 z-50 w-full border-b border-gray-200 bg-white/95">

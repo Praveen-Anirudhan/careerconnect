@@ -13,8 +13,8 @@ interface Job {
   requirements: string;
   responsibilities: string;
   skills: string;
-  posted_by: string;
-  created_at: string;
+  posted_by?: string;
+  created_at?: string;
 }
 
 interface GetJob {
