@@ -10,7 +10,7 @@ const NavBar = () => {
 
   const handleJobsClick = () => {
     if(!isUserAuthenticated){
-      navigate('/candidate/login');
+      navigate('/candidate/login?redirect=/jobs');
     }
     else{
       navigate('/jobs');
@@ -49,18 +49,19 @@ const NavBar = () => {
 
         <div className="flex items-center gap-3">
           <button
-            className="inline-flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium border border-gray-300 bg-white text-gray-600 rounded-md hover:bg-cyan-500 hover:text-white transition-colors"
+            className="inline-flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium border border-gray-300 bg-white text-gray-600 rounded-md hover:bg-cyan-500 hover:text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             onClick={() => navigate('/recruiter/login')}
+            disabled={isUserAuthenticated === true}
           >
             <User className="h-4 w-4 mr-2" />
-            Recruiter Login
+            {isUserAuthenticated === true && localStorage.getItem('role') === 'recruiter' ? 'Welcome Recruiter' : 'Recruiter Login' }
           </button>
           <button 
             className="inline-flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium bg-cyan-500 text-white rounded-md hover:bg-cyan-600 transition-colors"
             onClick={() => navigate('/candidate/login')}
           >
             <User className="h-4 w-4 mr-2" />
-            Candidate Login
+            {isUserAuthenticated && localStorage.getItem('role') === 'candidate' ? 'Welcome Candidate' : 'Candidate Login' }
           </button>
         </div>
       </div>
