@@ -3,8 +3,6 @@ import { MapPin, DollarSign } from 'lucide-react';
 interface Job {
   title: string;
   job_type: string;
-  job_description: string;
-  company: string;
   location: string;
   salary_range: string;
 }
@@ -19,14 +17,6 @@ const JobCard = ({ getJob }: { getJob: Job }) => {
           {getJob?.job_type}
         </span>
       </div>
-
-      {/* Company */}
-      <p className="text-gray-700 font-medium mb-3">{getJob?.company}</p>
-
-      {/* Description */}
-      <p className="text-gray-600 text-sm mb-4 line-clamp-2">
-        {getJob?.job_description}
-      </p>
 
       {/* Job Details */}
       <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600 mb-4">
