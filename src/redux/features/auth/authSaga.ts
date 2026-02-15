@@ -38,6 +38,7 @@ export function* handleSignUp(
   try {
     const { email, password, role } = action.payload;
     const response = yield call(registerUser, { email, password, role });
+    
     const user: User = {
       id: response?.user?.id,
       role: response?.user?.role,
