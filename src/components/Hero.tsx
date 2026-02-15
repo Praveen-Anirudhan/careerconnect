@@ -1,7 +1,10 @@
 import { ArrowRight } from 'lucide-react';
 import { heroImage } from '../../public/images';
+import { useNavigate } from 'react-router-dom';
 
 const Hero = () => {
+
+  const navigate = useNavigate();
   return (
     <section className="relative bg-gradient-to-br from-cyan-50 via-white to-cyan-50 py-20">
       <div className="container mx-auto px-4 max-w-7xl">
@@ -18,7 +21,9 @@ const Hero = () => {
               CareerConnect.
             </p>
             <div className="flex flex-wrap gap-4">
-              <button className="px-6 py-3 bg-cyan-600 text-white rounded-lg font-medium hover:bg-cyan-700 cursor-pointer transition-colors flex items-center gap-2 text-lg">
+              <button
+                onClick={() => navigate('/jobs')}
+                className="px-6 py-3 bg-cyan-600 text-white rounded-lg font-medium hover:bg-cyan-700 cursor-pointer transition-colors flex items-center gap-2 text-lg">
                 Browse Jobs <ArrowRight className="h-5 w-5" />
               </button>
               <button className="px-6 py-3 border-2 border-cyan-600 text-cyan-600 rounded-lg font-medium hover:bg-cyan-50 cursor-pointer transition-colors text-lg">
