@@ -5,7 +5,7 @@ import { SearchBar } from '../../components/SearchBar';
 import { jobsSelector } from '../../redux/features/job/selector.ts';
 import { useDispatch, useSelector } from 'react-redux';
 import { getJobRequest } from '../../redux/features/job/jobSlice.ts';
-import useSlowLoading from '../../hooks/useSlowLoading.ts';
+import LoadingPage from '../../components/LoadingPage.tsx';
 
 const JobsPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -13,8 +13,7 @@ const JobsPage = () => {
   const [selectedJobType, setSelectedJobType] = useState<string[]>([]);
   const [selectedLocation, setSelectedLocation] = useState<string[]>([]);
   const dispatch = useDispatch();
-  const { loading, getJob } = useSelector(jobsSelector);
-  const isSlowLoading = useSlowLoading(loading);
+  const { getJobLoading, getJob } = useSelector(jobsSelector);
 
   useEffect(() => {
     dispatch(getJobRequest())
@@ -56,11 +55,6 @@ const JobsPage = () => {
     selectedLocation.length > 0;
 
   const jobsCount = hasActiveFilters ? filteredJobsList.length : getJob.length;
-  const showNoJobsMessage = jobsCount === 0;
-
-  if (isSlowLoading) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <div className="bg-gray-50 min-h-screen">
@@ -128,13 +122,15 @@ const JobsPage = () => {
           {/* Jobs Grid */}
 
           <div className="flex-1">
-            {showNoJobsMessage ? (
-              <p className="text-gray-600">No jobs found</p>
-            ) : (
-              <p className="text-gray-600 mb-6">
+            {getJobLoading ?
+              (<div className="flex items-center justify-center">
+                  <div>{<LoadingPage />}</div>
+              </div>
+              ) :
+              (<p className="text-gray-600 mb-6">
                 Showing {jobsCount} {hasActiveFilters ? 'filtered ' : ''}jobs
-              </p>
-            )}
+              </p>)
+            }
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {getJob.map((getJob, index: number) => (
                 <JobCard key={index} getJob={getJob} />
