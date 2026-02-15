@@ -1,5 +1,4 @@
 import { ArrowRight } from 'lucide-react';
-import { SearchBar } from './SearchBar';
 import { heroImage } from '../../public/images';
 
 const Hero = () => {
@@ -36,9 +35,6 @@ const Hero = () => {
               className="rounded-lg shadow-2xl w-full h-auto object-cover"
             />
           </div>
-        </div>
-        <div className="mt-12">
-          <SearchBar />
         </div>
       </div>
     </section>
