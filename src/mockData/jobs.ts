@@ -4,7 +4,7 @@ export interface Job {
   type: string;
   description: string;
   location: string;
-  salary: string;
+  salary_range?: string;
   posted: string;
   skills: string[];
 }

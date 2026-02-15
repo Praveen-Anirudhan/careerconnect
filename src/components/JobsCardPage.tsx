@@ -6,7 +6,7 @@ const JobsPage = () => {
     <div className="px-6 py-8 max-w-7xl mx-auto">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
         {jobs.map((job, index) => (
-          <JobCard key={index} job={job} />
+          <JobCard key={index} getJob={job} />
         ))}
       </div>
       <div className="flex justify-center">

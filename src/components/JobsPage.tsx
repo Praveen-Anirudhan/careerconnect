@@ -1,7 +1,4 @@
 import { useState } from 'react';
-import JobCard from './JobCard';
-import type { Job } from '../mockData/jobs';
-import { filteredJobs } from '../utils/filterJobs.ts';
 import { SearchBar } from './SearchBar';
 
 const JobsPage = () => {
@@ -92,23 +89,6 @@ const JobsPage = () => {
                   ))}
                 </div>
               </div>
-            </div>
-          </div>
-
-          {/* Jobs Grid */}
-          <div className="flex-1">
-            <p className="text-gray-600 mb-6">
-              Showing {filteredJobs.length} jobs
-            </p>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              {filteredJobs({
-                searchQuery,
-                locationQuery,
-                selectedJobType,
-                selectedLocation,
-              }).map((job: Job, index: number) => (
-                <JobCard key={index} job={job} />
-              ))}
             </div>
           </div>
         </div>

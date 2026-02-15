@@ -2,9 +2,9 @@ import { MapPin, DollarSign } from 'lucide-react';
 
 interface Job {
   title: string;
-  job_type: string;
+  job_type?: string;
   location: string;
-  salary_range: string;
+  salary_range?: string;
 }
 
 const JobCard = ({ getJob }: { getJob: Job }) => {
