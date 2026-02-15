@@ -1,15 +1,24 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import JobCard from '../../components/JobCard';
 import { filteredJobs } from '../../utils/filterJobs';
-import type { Job } from '../../mockData/jobs';
-import jobs from '../../mockData/jobs';
 import { SearchBar } from '../../components/SearchBar';
+import { jobsSelector } from '../../redux/features/job/selector.ts';
+import { useDispatch, useSelector } from 'react-redux';
+import { getJobRequest } from '../../redux/features/job/jobSlice.ts';
+import useSlowLoading from '../../hooks/useSlowLoading.ts';
 
 const JobsPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [locationQuery, setLocationQuery] = useState('');
   const [selectedJobType, setSelectedJobType] = useState<string[]>([]);
   const [selectedLocation, setSelectedLocation] = useState<string[]>([]);
+  const dispatch = useDispatch();
+  const { loading, getJob } = useSelector(jobsSelector);
+  const isSlowLoading = useSlowLoading(loading);
+
+  useEffect(() => {
+    dispatch(getJobRequest())
+  }, [dispatch]);
 
   const locationData = [
     'Remote',
@@ -46,8 +55,12 @@ const JobsPage = () => {
     selectedJobType.length > 0 ||
     selectedLocation.length > 0;
 
-  const jobsCount = hasActiveFilters ? filteredJobsList.length : jobs.length;
+  const jobsCount = hasActiveFilters ? filteredJobsList.length : getJob.length;
   const showNoJobsMessage = jobsCount === 0;
+
+  if (isSlowLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="bg-gray-50 min-h-screen">
@@ -123,13 +136,8 @@ const JobsPage = () => {
               </p>
             )}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              {filteredJobs({
-                searchQuery,
-                locationQuery,
-                selectedJobType,
-                selectedLocation,
-              }).map((job: Job, index: number) => (
-                <JobCard key={index} job={job} />
+              {getJob.map((getJob, index: number) => (
+                <JobCard key={index} getJob={getJob} />
               ))}
             </div>
           </div>

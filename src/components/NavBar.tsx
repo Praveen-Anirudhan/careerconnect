@@ -1,8 +1,21 @@
+import {useContext} from 'react';
+import AuthContext  from '../context/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
 import { Briefcase, User } from 'lucide-react';
 
+
 const NavBar = () => {
   const navigate = useNavigate();
+  const { isUserAuthenticated } = useContext(AuthContext) ?? {isUserAuthenticated : null};
+
+  const handleJobsClick = () => {
+    if(!isUserAuthenticated){
+      navigate('/candidate/login');
+    }
+    else{
+      navigate('/jobs');
+    }
+  }
 
   return (
     <nav className="sticky top-0 z-50 w-full border-b border-gray-200 bg-white/95">
@@ -19,12 +32,13 @@ const NavBar = () => {
           >
             Home
           </Link>
-          <Link
-            to="jobs"
+
+          <button
+            onClick={handleJobsClick}
             className="text-sm font-medium transition-colors hover:text-cyan-500 text-gray-600"
           >
             Jobs
-          </Link>
+          </button>
           <Link
             to="my-applications"
             className="text-sm font-medium transition-colors hover:text-cyan-500 text-gray-600"
