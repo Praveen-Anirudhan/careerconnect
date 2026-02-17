@@ -5,7 +5,6 @@ import { signUpRequest } from '../redux/features/auth/authSlice.ts';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAuth } from '../hooks/useAuth.ts';
 import { isAuthenticated } from '../services/tokenService.ts';
-import { selectLoading, selectUser } from '../redux/features/auth/selector.ts';
 import { setUserRole } from '../services/tokenService';
 import {
   selectError,
