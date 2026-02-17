@@ -14,6 +14,10 @@ export const schema = buildSchema(`
     INTERNSHIP
   }
   
+  type AuthError {
+    message: String!
+  }
+  
   type Job {
     id: ID!
     title: String!
@@ -32,6 +36,7 @@ export const schema = buildSchema(`
   type AuthPayload {
      token: String!
      user: User!
+     errors: [AuthError!]
   }  
   
   input JobInput {
