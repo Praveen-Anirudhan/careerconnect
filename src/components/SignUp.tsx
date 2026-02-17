@@ -5,6 +5,7 @@ import { signUpRequest } from '../redux/features/auth/authSlice.ts';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAuth } from '../hooks/useAuth.ts';
 import { isAuthenticated } from '../services/tokenService.ts';
+import { setUserRole } from '../services/tokenService';
 import {
   selectError,
   selectLoading,
@@ -30,7 +31,7 @@ const SignUp = ({role}: SignUpProps) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      dispatch(signUpRequest({ email, password, role: 'RECRUITER' }));
+      dispatch(signUpRequest({ email, password, role: role.toUpperCase() }));
       setLoading(true);
     } catch (error) {
       console.error(error);
@@ -40,9 +41,11 @@ const SignUp = ({role}: SignUpProps) => {
   useEffect(() => {
     if (isAuthenticated() && user?.token) {
       signUp(user?.token);
-      navigate('/recruiter/dashboard');
+      const dashboardPath = role === 'recruiter' ? '/recruiter/dashboard' : '/candidate/dashboard';
+      navigate(dashboardPath);
+      setUserRole(role);
     }
-  }, [user, navigate]);
+  }, [user, navigate, role]);
 
   return (
     <div className="flex flex-col justify-center items-center sm:min-h-screen overflow-y-auto">
