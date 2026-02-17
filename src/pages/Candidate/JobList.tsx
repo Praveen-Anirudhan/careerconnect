@@ -5,7 +5,8 @@ import { SearchBar } from '../../components/SearchBar';
 import { jobsSelector } from '../../redux/features/job/selector.ts';
 import { useDispatch, useSelector } from 'react-redux';
 import { getJobRequest } from '../../redux/features/job/jobSlice.ts';
-import useSlowLoading from '../../hooks/useSlowLoading.ts';
+import LoadingPage from '../../components/LoadingPage.tsx';
+import { useNavigate } from 'react-router-dom';
 
 const JobsPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -13,8 +14,8 @@ const JobsPage = () => {
   const [selectedJobType, setSelectedJobType] = useState<string[]>([]);
   const [selectedLocation, setSelectedLocation] = useState<string[]>([]);
   const dispatch = useDispatch();
-  const { loading, getJob } = useSelector(jobsSelector);
-  const isSlowLoading = useSlowLoading(loading);
+  const { getJobLoading, getJob } = useSelector(jobsSelector);
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getJobRequest())
@@ -56,15 +57,16 @@ const JobsPage = () => {
     selectedLocation.length > 0;
 
   const jobsCount = hasActiveFilters ? filteredJobsList.length : getJob.length;
-  const showNoJobsMessage = jobsCount === 0;
-
-  if (isSlowLoading) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <div className="bg-gray-50 min-h-screen">
       <div className="max-w-7xl mx-auto px-6 py-8">
+        <button
+          onClick={() => navigate('/')}
+          className="inline-flex items-center gap-2 py-2 text-base font-medium text-gray-600 hover:text-cyan-500 transition-colors"
+        >
+          ← Back to Home
+        </button>
         <h1 className="text-4xl font-bold text-gray-900 mb-8">
           Browse All Jobs
         </h1>
@@ -128,8 +130,10 @@ const JobsPage = () => {
           {/* Jobs Grid */}
 
           <div className="flex-1">
-            {showNoJobsMessage ? (
-              <p className="text-gray-600">No jobs found</p>
+            {getJobLoading ? (
+              <div className="flex items-center justify-center">
+                <div>{<LoadingPage />}</div>
+              </div>
             ) : (
               <p className="text-gray-600 mb-6">
                 Showing {jobsCount} {hasActiveFilters ? 'filtered ' : ''}jobs

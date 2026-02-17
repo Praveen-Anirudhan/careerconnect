@@ -10,6 +10,7 @@ import { isAuthenticated } from '../services/tokenService';
 import { useAuth } from '../hooks/useAuth.ts';
 import { Link } from 'react-router-dom';
 import PasswordInput from './PasswordInput.tsx';
+import { setUserRole } from '../services/tokenService';
 
 interface LoginFormProps {
   role: string;
@@ -31,6 +32,8 @@ const LoginForm = ({role}: LoginFormProps) => {
     try {
       dispatch(loginRequest({ email, password }));
       setLoading(true);
+      const redirect = new URLSearchParams(window.location.search).get('redirect');
+      navigate(redirect || '/dashboard');
     } catch (error) {
       console.error(error);
     }
@@ -39,7 +42,9 @@ const LoginForm = ({role}: LoginFormProps) => {
   useEffect(() => {
     if (isAuthenticated() && user?.token) {
       login(user?.token);
-      navigate('/recruiter/dashboard');
+      const dashboardPath = role === 'recruiter' ? '/recruiter/dashboard' : '/candidate/dashboard';
+      navigate(dashboardPath)
+      setUserRole(role);
     }
   }, [user, navigate]);
 

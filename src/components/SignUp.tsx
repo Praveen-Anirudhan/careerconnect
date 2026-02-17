@@ -5,7 +5,12 @@ import { signUpRequest } from '../redux/features/auth/authSlice.ts';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAuth } from '../hooks/useAuth.ts';
 import { isAuthenticated } from '../services/tokenService.ts';
-import { selectLoading, selectUser } from '../redux/features/auth/selector.ts';
+import { setUserRole } from '../services/tokenService';
+import {
+  selectError,
+  selectLoading,
+  selectUser,
+} from '../redux/features/auth/selector.ts';
 import PasswordInput from './PasswordInput.tsx';
 
 interface SignUpProps {
@@ -21,11 +26,12 @@ const SignUp = ({role}: SignUpProps) => {
   const user = useSelector(selectUser);
   const loadingS = useSelector(selectLoading);
   const { signUp } = useAuth();
+  const errorMessage = useSelector(selectError);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      dispatch(signUpRequest({ email, password, role: 'RECRUITER' }));
+      dispatch(signUpRequest({ email, password, role: role.toUpperCase() }));
       setLoading(true);
     } catch (error) {
       console.error(error);
@@ -35,9 +41,11 @@ const SignUp = ({role}: SignUpProps) => {
   useEffect(() => {
     if (isAuthenticated() && user?.token) {
       signUp(user?.token);
-      navigate('/recruiter/dashboard');
+      const dashboardPath = role === 'recruiter' ? '/recruiter/dashboard' : '/candidate/dashboard';
+      navigate(dashboardPath);
+      setUserRole(role);
     }
-  }, [user, navigate]);
+  }, [user, navigate, role]);
 
   return (
     <div className="flex flex-col justify-center items-center sm:min-h-screen overflow-y-auto">
@@ -78,6 +86,10 @@ const SignUp = ({role}: SignUpProps) => {
             </label>
             <PasswordInput password={password} setPassword={setPassword} />
           </div>
+
+          {errorMessage && (
+            <p className="text-red-500 mt-2 text-sm">{errorMessage}</p>
+          )}
 
           <button
             type="submit"
