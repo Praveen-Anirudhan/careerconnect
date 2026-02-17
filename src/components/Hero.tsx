@@ -1,8 +1,14 @@
 import { ArrowRight } from 'lucide-react';
-import { SearchBar } from './SearchBar';
 import { heroImage } from '../../public/images';
+import { useNavigate } from 'react-router-dom';
+import AuthContext from '../context/AuthContext.tsx';
+import { useContext } from 'react';
 
 const Hero = () => {
+
+  const navigate = useNavigate();
+  const {isUserAuthenticated} = useContext(AuthContext) ?? {isUserAuthenticated : null};
+
   return (
     <section className="relative bg-gradient-to-br from-cyan-50 via-white to-cyan-50 py-20">
       <div className="container mx-auto px-4 max-w-7xl">
@@ -19,10 +25,14 @@ const Hero = () => {
               CareerConnect.
             </p>
             <div className="flex flex-wrap gap-4">
-              <button className="px-6 py-3 bg-cyan-600 text-white rounded-lg font-medium hover:bg-cyan-700 cursor-pointer transition-colors flex items-center gap-2 text-lg">
+              <button
+                onClick={() => navigate('/jobs')}
+                className="px-6 py-3 bg-cyan-600 text-white rounded-lg font-medium hover:bg-cyan-700 cursor-pointer transition-colors flex items-center gap-2 text-lg">
                 Browse Jobs <ArrowRight className="h-5 w-5" />
               </button>
-              <button className="px-6 py-3 border-2 border-cyan-600 text-cyan-600 rounded-lg font-medium hover:bg-cyan-50 cursor-pointer transition-colors text-lg">
+              <button
+                onClick={isUserAuthenticated ? () => navigate('/recruiter/login') : () => navigate('/recruiter/dashboard')}
+                className="px-6 py-3 border-2 border-cyan-600 text-cyan-600 rounded-lg font-medium hover:bg-cyan-50 cursor-pointer transition-colors text-lg">
                 For Recruiters
               </button>
             </div>
@@ -36,9 +46,6 @@ const Hero = () => {
               className="rounded-lg shadow-2xl w-full h-auto object-cover"
             />
           </div>
-        </div>
-        <div className="mt-12">
-          <SearchBar />
         </div>
       </div>
     </section>

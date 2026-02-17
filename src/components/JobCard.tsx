@@ -1,61 +1,33 @@
-import { MapPin, DollarSign, Clock } from 'lucide-react';
+import { MapPin, DollarSign } from 'lucide-react';
 
 interface Job {
   title: string;
-  type: string;
-  company: string;
-  description: string;
+  job_type?: string;
   location: string;
-  salary: string;
-  posted: string;
-  skills: string[];
+  salary_range?: string;
 }
 
-const JobCard = ({ job }: { job: Job }) => {
+const JobCard = ({ getJob }: { getJob: Job }) => {
   return (
     <div className="bg-white rounded-lg border border-gray-200 p-6 hover:shadow-lg transition-shadow flex flex-col h-full">
       {/* Header */}
       <div className="flex justify-between items-start mb-4">
-        <h3 className="text-xl font-semibold text-gray-900">{job.title}</h3>
+        <h3 className="text-xl font-semibold text-gray-900">{getJob?.title}</h3>
         <span className="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full">
-          {job.type}
+          {getJob?.job_type}
         </span>
       </div>
-
-      {/* Company */}
-      <p className="text-gray-700 font-medium mb-3">{job.company}</p>
-
-      {/* Description */}
-      <p className="text-gray-600 text-sm mb-4 line-clamp-2">
-        {job.description}
-      </p>
 
       {/* Job Details */}
       <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600 mb-4">
         <div className="flex items-center gap-1">
           <MapPin size={16} />
-          <span>{job.location}</span>
+          <span>{getJob?.location}</span>
         </div>
         <div className="flex items-center gap-1">
           <DollarSign size={16} />
-          <span>{job.salary}</span>
+          <span>{getJob?.salary_range}</span>
         </div>
-        <div className="flex items-center gap-1">
-          <Clock size={16} />
-          <span>{job.posted}</span>
-        </div>
-      </div>
-
-      {/* Skills/Tags */}
-      <div className="flex flex-wrap gap-2 mb-6">
-        {job.skills.map((skill, index) => (
-          <span
-            key={index}
-            className="px-3 py-1 bg-gray-50 text-gray-700 text-sm rounded-md border border-gray-200"
-          >
-            {skill}
-          </span>
-        ))}
       </div>
 
       {/* Actions */}

@@ -7,6 +7,11 @@ import { useAuth } from '../hooks/useAuth.ts';
 import { isAuthenticated } from '../services/tokenService.ts';
 import { selectLoading, selectUser } from '../redux/features/auth/selector.ts';
 import { setUserRole } from '../services/tokenService';
+import {
+  selectError,
+  selectLoading,
+  selectUser,
+} from '../redux/features/auth/selector.ts';
 import PasswordInput from './PasswordInput.tsx';
 
 interface SignUpProps {
@@ -22,6 +27,7 @@ const SignUp = ({role}: SignUpProps) => {
   const user = useSelector(selectUser);
   const loadingS = useSelector(selectLoading);
   const { signUp } = useAuth();
+  const errorMessage = useSelector(selectError);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -81,6 +87,10 @@ const SignUp = ({role}: SignUpProps) => {
             </label>
             <PasswordInput password={password} setPassword={setPassword} />
           </div>
+
+          {errorMessage && (
+            <p className="text-red-500 mt-2 text-sm">{errorMessage}</p>
+          )}
 
           <button
             type="submit"

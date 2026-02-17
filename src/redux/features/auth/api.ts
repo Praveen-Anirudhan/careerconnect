@@ -6,6 +6,9 @@ export const REGISTER_MUTATION = `
         id
         role
       }
+      errors {
+        message
+      }
     }
   }
 `;

@@ -17,7 +17,7 @@ export const registerUser = async ({
     variables: { email, password, role },
   });
 
-  if (result.errors) {
+  if (result?.errors) {
     throw new Error(result.errors[0]?.message || 'Registration failed');
   }
 

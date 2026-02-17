@@ -23,7 +23,6 @@ export const getJob = async () => {
     query: GET_JOBS,
     token: localStorage.getItem('auth_token'),
   });
-
   if (result.errors) {
     throw new Error(result.errors[0]?.message || 'Job fetching failed');
   }
