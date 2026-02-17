@@ -31,6 +31,8 @@ const LoginForm = ({role}: LoginFormProps) => {
     try {
       dispatch(loginRequest({ email, password }));
       setLoading(true);
+      const redirect = new URLSearchParams(window.location.search).get('redirect');
+      navigate(redirect || '/dashboard');
     } catch (error) {
       console.error(error);
     }
