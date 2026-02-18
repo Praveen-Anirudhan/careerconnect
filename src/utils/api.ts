@@ -23,6 +23,7 @@ export async function graphqlRequest<VariablesType, ResponseType>({
   };
 
   const graphqlEndpoint = import.meta.env.VITE_GRAPHQL_ENDPOINT;
+  //const graphqlEndpoint = "http://localhost:3000/graphql";
   if (!graphqlEndpoint) {
     throw new Error('GRAPHQL_ENDPOINT is not defined in environment variables');
   }

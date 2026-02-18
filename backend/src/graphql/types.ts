@@ -43,5 +43,5 @@ export interface ApplyJob {
   firstName: string;
   lastName: string;
   email: string;
-  mobileNumber: string;
+  phoneNumber: string;
 }
