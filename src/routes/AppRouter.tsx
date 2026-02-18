@@ -17,6 +17,7 @@ import Dashboard from '../pages/Recruiter/Dashboard';
 import { useAuth } from '../hooks/useAuth.ts';
 import SignUp from '../pages/Recruiter/SignUp';
 import CandidateDashboard from '../pages/Candidate/CandidateDashboard';
+import ApplicationForm from '../components/ApplicationForm';
 
 export default function AppRouter() {
   const router = createBrowserRouter([
@@ -34,6 +35,7 @@ export default function AppRouter() {
         { path: '/recruiter/applicants/:jobId', element: <Applicants /> },
         { path: '/:role/login', element: <Login /> },
         { path: '/:role/signup', element: <SignUp /> },
+        { path: '/candidate/application-form', element: <ApplicationForm /> },
         {
           path: '/recruiter/dashboard',
           element: <ProtectedRoute />,

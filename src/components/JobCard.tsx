@@ -1,4 +1,5 @@
 import { MapPin, DollarSign } from 'lucide-react';
+import {useNavigate} from 'react-router-dom';
 
 interface Job {
   title: string;
@@ -8,6 +9,8 @@ interface Job {
 }
 
 const JobCard = ({ getJob }: { getJob: Job }) => {
+  const navigate = useNavigate();
+
   return (
     <div className="bg-white rounded-lg border border-gray-200 p-6 hover:shadow-lg transition-shadow flex flex-col h-full">
       {/* Header */}
@@ -35,7 +38,10 @@ const JobCard = ({ getJob }: { getJob: Job }) => {
         <button className="flex-1 px-8 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 transition-colors font-medium">
           View Details
         </button>
-        <button className="flex-1 px-8 py-2 bg-cyan-600 text-white rounded-md hover:bg-cyan-700 transition-colors font-medium">
+        <button
+          className="flex-1 px-8 py-2 bg-cyan-600 text-white rounded-md hover:bg-cyan-700 transition-colors font-medium"
+          onClick={() => navigate('/candidate/application-form')}
+        >
           Apply Now
         </button>
       </div>
