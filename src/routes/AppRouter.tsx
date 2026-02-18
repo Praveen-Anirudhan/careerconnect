@@ -35,7 +35,7 @@ export default function AppRouter() {
         { path: '/recruiter/applicants/:jobId', element: <Applicants /> },
         { path: '/:role/login', element: <Login /> },
         { path: '/:role/signup', element: <SignUp /> },
-        { path: '/candidate/application-form', element: <ApplicationForm /> },
+        { path: '/candidate/application-form/:jobId', element: <ApplicationForm /> },
         {
           path: '/recruiter/dashboard',
           element: <ProtectedRoute />,

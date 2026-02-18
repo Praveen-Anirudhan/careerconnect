@@ -40,7 +40,7 @@ export const schema = buildSchema(`
      firstName: String!
      lastName: String!
      email: String!
-     mobileNumber: String!
+     phoneNumber: String!
   }
 
   type AuthPayload {
@@ -68,7 +68,7 @@ export const schema = buildSchema(`
       firstName: String!
       lastName: String!
       email: String!
-      mobileNumber: String!
+      phoneNumber: String!
   }
 
   type Query {

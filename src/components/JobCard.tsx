@@ -6,6 +6,7 @@ interface Job {
   job_type?: string;
   location: string;
   salary_range?: string;
+  id: string;
 }
 
 const JobCard = ({ getJob }: { getJob: Job }) => {
@@ -40,7 +41,7 @@ const JobCard = ({ getJob }: { getJob: Job }) => {
         </button>
         <button
           className="flex-1 px-8 py-2 bg-cyan-600 text-white rounded-md hover:bg-cyan-700 transition-colors font-medium"
-          onClick={() => navigate('/candidate/application-form')}
+          onClick={() => navigate(`/candidate/application-form/${getJob.id}`)}
         >
           Apply Now
         </button>

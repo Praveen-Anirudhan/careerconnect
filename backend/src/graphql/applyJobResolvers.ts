@@ -13,8 +13,8 @@ export const applyJobResolvers = {
     const candidateId = context.user.id;
 
     const result = await sql`
-        INSERT INTO applications (job_id, candidate_id, first_name, last_name, email, mobile_number)
-        VALUES (${input.jobId}, ${candidateId}, ${input.firstName}, ${input.lastName}, ${input.email}, ${input.mobileNumber})
+        INSERT INTO applications (job_id, candidate_id, first_name, last_name, email, phone_number)
+        VALUES (${input.jobId}, ${candidateId}, ${input.firstName}, ${input.lastName}, ${input.email}, ${input.phoneNumber})
         RETURNING *
     `;
 

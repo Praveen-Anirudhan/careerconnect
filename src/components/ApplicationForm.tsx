@@ -1,15 +1,19 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { TextInput } from './JobDetails';
+import { useDispatch } from 'react-redux';
+import { applyJobRequest } from '../redux/features/applyJob/applyJobSlice';
 
 const ApplicationForm = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
     email: '',
-    mobileNumber: '',
+    phoneNumber: '',
+    error: ''
   });
 
   const handleChange =
@@ -30,7 +34,7 @@ const ApplicationForm = () => {
     formData.firstName &&
     formData.lastName &&
     formData.email &&
-    formData.mobileNumber;
+    formData.phoneNumber;
 
   return (
     <div className="min-h-screen bg-zinc-50 flex items-center justify-center px-4">
@@ -70,8 +74,8 @@ const ApplicationForm = () => {
           <TextInput
             label="Mobile Number"
             placeholder="9876543210"
-            value={formData.mobileNumber}
-            onChange={handleChange('mobileNumber')}
+            value={formData.phoneNumber}
+            onChange={handleChange('phoneNumber')}
           />
         </div>
 
@@ -92,6 +96,7 @@ const ApplicationForm = () => {
             className="mt-4 w-full bg-cyan-600 text-white py-3 rounded-xl
                      font-medium hover:bg-cyan-700 transition
                      disabled:opacity-50 disabled:cursor-not-allowed"
+            onClick={() => dispatch(applyJobRequest(formData))}
           >
             Apply Now
           </button>
