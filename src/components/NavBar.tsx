@@ -51,17 +51,30 @@ const NavBar = () => {
           <button
             className="inline-flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium border border-gray-300 bg-white text-gray-600 rounded-md hover:bg-cyan-500 hover:text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             onClick={() => navigate('/recruiter/login')}
-            disabled={isUserAuthenticated === true}
+            disabled={
+              isUserAuthenticated === true &&
+              localStorage.getItem('user_role') === 'recruiter'
+            }
           >
             <User className="h-4 w-4 mr-2" />
-            {isUserAuthenticated === true && localStorage.getItem('role') === 'recruiter' ? 'Welcome Recruiter' : 'Recruiter Login' }
+            {isUserAuthenticated === true &&
+            localStorage.getItem('user_role') === 'recruiter'
+              ? 'Welcome Recruiter'
+              : 'Recruiter Login'}
           </button>
-          <button 
-            className="inline-flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium bg-cyan-500 text-white rounded-md hover:bg-cyan-600 transition-colors"
+          <button
+            className="inline-flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium bg-cyan-500 text-white rounded-md hover:bg-cyan-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             onClick={() => navigate('/candidate/login')}
+            disabled={
+              isUserAuthenticated === true &&
+              localStorage.getItem('user_role') === 'candidate'
+            }
           >
             <User className="h-4 w-4 mr-2" />
-            {isUserAuthenticated && localStorage.getItem('role') === 'candidate' ? 'Welcome Candidate' : 'Candidate Login' }
+            {isUserAuthenticated &&
+            localStorage.getItem('user_role') === 'candidate'
+              ? 'Welcome Candidate'
+              : 'Candidate Login'}
           </button>
         </div>
       </div>
