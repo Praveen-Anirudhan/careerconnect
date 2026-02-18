@@ -1,4 +1,5 @@
 import { type ReactNode, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Briefcase, CirclePlus, File, LogOut, Users } from 'lucide-react';
 
 interface SideBarProps {
@@ -21,6 +22,7 @@ const SideBar = ({
   onMyJobsClick,
   onLogout,
 }: SideBarProps) => {
+  const navigate = useNavigate();
   const [isSelected, setIsSelected] = useState('Dashboard');
 
   const menuItems = [
@@ -42,7 +44,7 @@ const SideBar = ({
 
   return (
     <div className="bg-gray-50 h-screen w-72 border-r border-gray-200 flex flex-col">
-      <div className="flex flex-row items-center gap-2 mx-6 py-8">
+      <div className="flex flex-row items-center gap-2 mx-6 py-8 cursor-pointer" onClick={() => navigate('/')}>
         <Briefcase className="text-cyan-600" size={32} />
         <p className="text-2xl font-bold">CareerConnect</p>
       </div>
