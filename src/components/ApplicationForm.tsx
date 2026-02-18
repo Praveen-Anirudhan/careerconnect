@@ -15,8 +15,8 @@ const ApplicationForm = () => {
   const handleChange =
     (field: keyof typeof formData) =>
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      setFormData(() => ({
-        ...formData,
+      setFormData((prevState) => ({
+        ...prevState,
         [field]: e.target.value,
       }));
     };
