@@ -32,8 +32,6 @@ const LoginForm = ({role}: LoginFormProps) => {
     try {
       dispatch(loginRequest({ email, password }));
       setLoading(true);
-      const redirect = new URLSearchParams(window.location.search).get('redirect');
-      navigate(redirect || '/dashboard');
     } catch (error) {
       console.error(error);
     }
@@ -45,8 +43,18 @@ const LoginForm = ({role}: LoginFormProps) => {
       const dashboardPath = role === 'recruiter' ? '/recruiter/dashboard' : '/candidate/dashboard';
       navigate(dashboardPath)
       setUserRole(role);
+      const redirect = new URLSearchParams(window.location.search).get(
+        'redirect'
+      );
+      const destination = redirect
+        ? redirect
+        : role === 'recruiter'
+          ? '/recruiter/dashboard'
+          : '/candidate/dashboard';
+
+      navigate(destination);
     }
-  }, [user, navigate]);
+  }, [user, navigate, role]);
 
   return (
     <div className="flex flex-col justify-center items-center sm:min-h-screen overflow-y-auto">
