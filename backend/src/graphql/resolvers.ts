@@ -13,6 +13,7 @@ import { generateToken } from "../utils/auth";
 import { findUserByEmail, createUser, safeUser, type DBUser } from "../utils/user";
 import { sql } from "../db/index";
 import { jobResolvers } from "./jobResolvers";
+import { applyJobResolvers } from "./applyJobResolvers";
 
 export const resolvers = {
   users: async () => {
@@ -49,4 +50,5 @@ export const resolvers = {
   },
   getJobs: jobResolvers.getJobs,
   createJob: jobResolvers.createJob,
+  applyJob: applyJobResolvers.applyJob,
 };

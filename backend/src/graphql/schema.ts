@@ -32,6 +32,16 @@ export const schema = buildSchema(`
     created_at: String!
     responsibilities: String!
   }
+  
+  type Application{
+     id: ID!
+     job: Job!
+     candidateId: ID!
+     firstName: String!
+     lastName: String!
+     email: String!
+     mobileNumber: String!
+  }
 
   type AuthPayload {
      token: String!
@@ -52,6 +62,14 @@ export const schema = buildSchema(`
       responsibilities: String!
       created_at: String!
   }
+  
+  input ApplyJob{
+      jobId: ID!
+      firstName: String!
+      lastName: String!
+      email: String!
+      mobileNumber: String!
+  }
 
   type Query {
     users: [User!]!
@@ -62,5 +80,6 @@ export const schema = buildSchema(`
     register(email: String!, password: String!, role: String!): AuthPayload!
     login(email: String!, password: String!): AuthPayload!
     createJob(input: JobInput!): Job!
+    applyJob(input: ApplyJob!): Application!
   }
 `);

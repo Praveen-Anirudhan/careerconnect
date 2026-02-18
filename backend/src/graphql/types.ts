@@ -37,3 +37,11 @@ export interface Job {
   created_at: string;
   skills: string;
 }
+
+export interface ApplyJob {
+  jobId: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  mobileNumber: string;
+}
