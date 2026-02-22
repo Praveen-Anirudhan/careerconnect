@@ -3,11 +3,11 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 
 const initialState = {
   loading: false,
-  error: '',
   firstName: '',
   lastName: '',
   email: '',
   phoneNumber: '',
+  jobId: '',
 }
 
 const applyJobSlice = createSlice({
@@ -16,32 +16,28 @@ const applyJobSlice = createSlice({
   reducers: {
     applyJobRequest: (
       state,
-      action: PayloadAction<{firstName: string; lastName: string; email: string; phoneNumber: string; error: string}>
+      action: PayloadAction<{jobId: string; firstName: string; lastName: string; email: string; phoneNumber: string}>
     ) => {
       state.loading = true;
       state.firstName = action.payload.firstName;
       state.lastName = action.payload.lastName;
       state.email = action.payload.email;
       state.phoneNumber = action.payload.phoneNumber;
-      state.error = action.payload.error;
     },
     applyJobSuccess: (
       state,
-      action: PayloadAction<{firstName: string; lastName: string; email: string; phoneNumber: string; error: string}>
+      action: PayloadAction<{jobId: string; firstName: string; lastName: string; email: string; phoneNumber: string}>
     ) => {
       state.loading = false;
       state.firstName = action.payload.firstName;
       state.lastName = action.payload.lastName;
       state.email = action.payload.email;
       state.phoneNumber = action.payload.phoneNumber;
-      state.error = action.payload.error;
     },
     applyJobFailure: (
       state,
-      action: PayloadAction<{ error: string }>
     ) => {
       state.loading = false;
-      state.error = action.payload.error;
     }
   }
 })

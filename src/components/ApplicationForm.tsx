@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { TextInput } from './JobDetails';
 import { useDispatch } from 'react-redux';
 import { applyJobRequest } from '../redux/features/applyJob/applyJobSlice';
@@ -7,13 +7,14 @@ import { applyJobRequest } from '../redux/features/applyJob/applyJobSlice';
 const ApplicationForm = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { jobId } = useParams<{ jobId: string }>();
 
   const [formData, setFormData] = useState({
+    jobId: jobId,
     firstName: '',
     lastName: '',
     email: '',
     phoneNumber: '',
-    error: ''
   });
 
   const handleChange =
@@ -27,7 +28,6 @@ const ApplicationForm = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(formData);
   };
 
   const isFormValid =
@@ -96,7 +96,7 @@ const ApplicationForm = () => {
             className="mt-4 w-full bg-cyan-600 text-white py-3 rounded-xl
                      font-medium hover:bg-cyan-700 transition
                      disabled:opacity-50 disabled:cursor-not-allowed"
-            onClick={() => dispatch(applyJobRequest(formData))}
+            onClick={() => dispatch(applyJobRequest({...formData, jobId: jobId!}))}
           >
             Apply Now
           </button>

@@ -4,21 +4,18 @@ import type { ApplyJobInput } from "./types";
 import { applyJob } from './applyJob.ts';
 import {
   applyJobSuccess,
-  applyJobFailure,
   applyJobRequest,
 } from './applyJobSlice.ts';
 
 export function* handleApplyJob(
-    action: PayloadAction<{input: ApplyJobInput}>
+    action: PayloadAction<ApplyJobInput>
 ): Generator {
   try {
-    const { input } = action.payload;
+    const input = action.payload;
     const response = yield call(applyJob, input);
     yield put(applyJobSuccess(response.id));
-  } catch (error: unknown) {
-    const errorMessage =
-      error instanceof Error ? error.message : 'An unknown error occurred';
-    yield put(applyJobFailure({error: errorMessage}));
+  } catch {
+    //Do Nothing
   }
 }
 
