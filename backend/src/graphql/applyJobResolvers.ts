@@ -6,7 +6,7 @@ export const applyJobResolvers = {
     { input }: { input: ApplyJob },
     context: { user: { id: string } }
   ) => {
-    if (!context.user) {
+    if (!context?.user) {
       throw new Error('Unauthorized');
     }
 
