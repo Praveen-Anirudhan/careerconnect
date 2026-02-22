@@ -33,8 +33,8 @@ export const resolvers = {
   }) => {
     const hashed = await hashPassword(password);
     const user = await createUser(email, hashed, role);
-    const token = generateToken({ id: user.id });
-    return { token, user };
+    const token = generateToken({ id: user.id, role: user?.role});
+    return { token, user, role };
   },
 
   login: async ({ email, password }: { email: string; password: string }) => {
@@ -45,6 +45,7 @@ export const resolvers = {
     const token = generateToken({ id: user.id });
     return {
       token,
+      role: user.role,
       user: safeUser(user as DBUser),
     };
   },

@@ -6,14 +6,13 @@ import { JwtPayload } from 'jsonwebtoken';
 import { AuthContext } from './types';
 
 export const jobResolvers = {
-  getJobs: async (_args: unknown, context: AuthContext): Promise<Job[]> => {
-    try {
+    getJobs: async (_args: unknown, context: AuthContext): Promise<Job[]> => {
+      try{
       if (!context.token) {
         throw new Error('Unauthorized');
       }
 
       const user = verifyToken(context.token) as JwtPayload;
-      const userId = user.sub as string;
       if (!user) {
         throw new Error('Unauthorized');
       }
@@ -21,7 +20,6 @@ export const jobResolvers = {
       const jobs = await sql`
         SELECT * 
         FROM jobs
-        WHERE posted_by = ${userId}
         ORDER BY created_at DESC;
       `;
 
