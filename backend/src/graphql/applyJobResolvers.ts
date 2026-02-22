@@ -4,13 +4,13 @@ import { ApplyJob} from './types';
 export const applyJobResolvers = {
   applyJob: async (
     { input }: { input: ApplyJob },
-    context: { user: { sub: string; role?: string | null } }
+    context: { user: { sub: string } }
   ) => {
     if (!context?.user) {
       throw new Error('Unauthorized');
     }
 
-    const candidateId = context.user.role;
+    const candidateId = context.user.sub;
 
     const result = await sql`
         INSERT INTO applications (job_id, candidate_id, first_name, last_name, email, phone_number)
