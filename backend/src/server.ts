@@ -36,7 +36,7 @@ app.use(
         user = jwt.verify(tokenValue, secret, {
           algorithms: ['HS256'],
           issuer: 'careerconnect',
-        }) as JwtPayload & { id: string | number };
+        }) as JwtPayload & { sub: string; role?: string | null };
       } catch (err) {
         console.log('Invalid token', err);
       }
